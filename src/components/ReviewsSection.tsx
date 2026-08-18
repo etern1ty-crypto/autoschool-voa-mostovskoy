@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useCrm } from '../context/CrmContext';
+import { REAL_DROM_REVIEWS } from '../data/autoschoolData';
 import { Star, MessageSquare, CheckCircle } from 'lucide-react';
 
 export const ReviewsSection: React.FC = () => {
-  const { reviews } = useCrm();
   const [isPaused, setIsPaused] = useState(false);
 
   // Duplicate reviews array to create seamless infinite loop
-  const duplicatedReviews = [...reviews, ...reviews];
+  const duplicatedReviews = [...REAL_DROM_REVIEWS, ...REAL_DROM_REVIEWS];
 
   return (
     <section id="reviews" className="py-20 bg-[#080A0F] relative border-b border-white/5 overflow-hidden">

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCrm } from '../context/CrmContext';
+import {
+  DRIVER_PREPARATION_TARIFFS,
+  RETRAINING_PROGRAMS,
+  PRACTICE_SERVICES,
+} from '../data/autoschoolData';
 import { Check, Clock, ArrowRight, Calculator, Percent } from 'lucide-react';
 
 interface PricingSectionProps {
@@ -8,7 +12,6 @@ interface PricingSectionProps {
 }
 
 export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }) => {
-  const { tariffs, retraining, practice } = useCrm();
   const [activeTab, setActiveTab] = useState<'prep' | 'retrain' | 'practice'>('prep');
 
   // 0% Installment Calculator State
@@ -17,8 +20,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
   const [initialPayment, setInitialPayment] = useState<number>(15000);
 
   const selectedCalcTariff =
-    tariffs.find((t) => t.id === calcCategory) || tariffs[1] || tariffs[0];
-  const remainingAmount = Math.max(0, (selectedCalcTariff?.price || 70000) - initialPayment);
+    DRIVER_PREPARATION_TARIFFS.find((t) => t.id === calcCategory) || DRIVER_PREPARATION_TARIFFS[1];
+  const remainingAmount = Math.max(0, selectedCalcTariff.price - initialPayment);
   const monthlyPayment = Math.round(remainingAmount / calcMonths);
 
   const formatPrice = (price: number) => {
@@ -28,7 +31,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
   return (
     <section id="pricing" className="py-20 bg-[#080A0F] relative border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Section Header (Без "2026") */}
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-extrabold uppercase tracking-wider mb-3">
             <Percent className="w-3.5 h-3.5" />
@@ -87,7 +90,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
               transition={{ duration: 0.35, ease: 'easeOut' }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
-              {tariffs.map((tariff) => (
+              {DRIVER_PREPARATION_TARIFFS.map((tariff) => (
                 <div
                   key={tariff.id}
                   className={`dashboard-card rounded-xl p-6 flex flex-col justify-between transition-all group ${
@@ -155,7 +158,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
               transition={{ duration: 0.35, ease: 'easeOut' }}
               className="grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              {retraining.map((item) => (
+              {RETRAINING_PROGRAMS.map((item) => (
                 <div
                   key={item.id}
                   className="dashboard-card rounded-xl p-6 border-white/10 hover:border-national-red/50 flex flex-col justify-between"
@@ -203,7 +206,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
               transition={{ duration: 0.35, ease: 'easeOut' }}
               className="grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              {practice.map((item) => (
+              {PRACTICE_SERVICES.map((item) => (
                 <div
                   key={item.id}
                   className="dashboard-card rounded-xl p-6 border-white/10 hover:border-national-red/50 flex flex-col justify-between"
@@ -270,7 +273,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                     onChange={(e) => setCalcCategory(e.target.value)}
                     className="w-full px-4 py-3 rounded bg-surface-card border border-white/10 text-white text-sm focus:outline-none focus:border-national-red transition-colors"
                   >
-                    {tariffs.map((t) => (
+                    {DRIVER_PREPARATION_TARIFFS.map((t) => (
                       <option key={t.id} value={t.id}>
                         {t.title} — {formatPrice(t.price)}
                       </option>
@@ -294,7 +297,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                   <input
                     type="range"
                     min="10000"
-                    max={Math.max(15000, (selectedCalcTariff?.price || 70000) - 10000)}
+                    max={selectedCalcTariff.price - 10000}
                     step="5000"
                     value={initialPayment}
                     onChange={(e) => setInitialPayment(Number(e.target.value))}
@@ -336,12 +339,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                   <div className="flex justify-between">
                     <span className="text-slate-400">Полная стоимость курса:</span>
                     <motion.span
-                      key={selectedCalcTariff?.price}
+                      key={selectedCalcTariff.price}
                       initial={{ opacity: 0, y: -5 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="font-bold text-white"
                     >
-                      {formatPrice(selectedCalcTariff?.price || 70000)}
+                      {formatPrice(selectedCalcTariff.price)}
                     </motion.span>
                   </div>
                   <div className="flex justify-between">
@@ -373,7 +376,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                 <div className="text-center py-2">
                   <div className="text-xs text-slate-400 mb-1 uppercase tracking-wider">Платеж в месяц (0% переплат):</div>
                   <motion.div
-                    key={`${monthlyPayment}-${calcMonths}-${calcCategory}-${selectedCalcTariff?.price}`}
+                    key={`${monthlyPayment}-${calcMonths}-${calcCategory}`}
                     initial={{ opacity: 0, scale: 0.9, y: 8 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -386,7 +389,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
 
               <button
                 onClick={() =>
-                  onSelectTariff(`${selectedCalcTariff?.title || 'Обучение'} (Рассрочка)`, selectedCalcTariff?.price || 70000)
+                  onSelectTariff(`${selectedCalcTariff.title} (Рассрочка)`, selectedCalcTariff.price)
                 }
                 className="w-full py-4 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition shadow-lg shadow-national-red/30 mt-6 active:scale-[0.98]"
               >

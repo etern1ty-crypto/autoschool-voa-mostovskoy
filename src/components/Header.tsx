@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
 import { useAccessibility } from '../context/AccessibilityContext';
-import { useCrm } from '../context/CrmContext';
 import { SCHOOL_INFO } from '../data/autoschoolData';
-import { Phone, Eye, Menu, X, ShieldCheck, Settings } from 'lucide-react';
+import { Phone, Eye, Menu, X, ShieldCheck } from 'lucide-react';
 
 interface HeaderProps {
   onOpenBooking: () => void;
   onNavigateRosobrnadzor: () => void;
-  onOpenCrm: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenBooking,
   onNavigateRosobrnadzor,
-  onOpenCrm,
 }) => {
   const { toggleAccessibility, isActive } = useAccessibility();
-  const { leads } = useCrm();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const newLeadsCount = leads.filter((l) => l.status === 'new').length;
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#080A0F]/95 backdrop-blur-xl border-b border-white/10 shadow-lg">
@@ -37,21 +31,11 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4">
-            {/* CRM / Admin Quick Trigger */}
-            <button
-              onClick={onOpenCrm}
-              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded border border-national-red/40 bg-national-red/10 text-national-red hover:bg-national-red hover:text-white transition text-xs font-bold"
-              title="Панель управления автошколой"
-            >
-              <Settings className="w-3.5 h-3.5" />
-              <span>CRM {newLeadsCount > 0 && `(${newLeadsCount})`}</span>
-            </button>
-
             <button
               onClick={onNavigateRosobrnadzor}
               className="text-xs text-slate-400 hover:text-national-red transition underline decoration-dotted font-medium hidden sm:inline"
             >
-              Сведения об организации
+              Сведения об образовательной организации
             </button>
 
             <button
@@ -75,7 +59,6 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Left Links */}
         <div className="hidden lg:flex items-center gap-7 text-xs uppercase tracking-wider font-bold text-slate-300 flex-1 justify-end pr-10">
           <a href="#fleet" className="nav-glow transition-colors py-1">Автопарк</a>
-          {/* Убрали "2026" - теперь просто "Цены" */}
           <a href="#pricing" className="nav-glow transition-colors py-1">Цены</a>
           <a href="#autodrome" className="nav-glow transition-colors py-1">Автодром</a>
         </div>
@@ -126,12 +109,6 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Mobile Toggle */}
         <div className="flex items-center gap-2 lg:hidden">
-          <button
-            onClick={onOpenCrm}
-            className="p-2 rounded bg-surface-card border border-national-red/40 text-national-red text-xs font-bold"
-          >
-            CRM
-          </button>
           <button
             onClick={onOpenBooking}
             className="bg-national-red text-white px-3.5 py-1.5 rounded-sm font-bold uppercase tracking-wider text-xs"

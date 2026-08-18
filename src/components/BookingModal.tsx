@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useCrm } from '../context/CrmContext';
 import { X, CheckCircle2, ArrowRight, Car, Phone, User } from 'lucide-react';
 
 interface BookingModalProps {
@@ -13,7 +12,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   onClose,
   initialTariff = 'Категория «В»',
 }) => {
-  const { addLead } = useCrm();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState(initialTariff);
@@ -47,9 +45,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       alert('Пожалуйста, подтвердите согласие на обработку персональных данных (152-ФЗ)');
       return;
     }
-
-    // Add directly to CRM
-    addLead(name, phone, category);
     setSubmitted(true);
   };
 
