@@ -5,9 +5,14 @@ import { MapPin, Phone } from 'lucide-react';
 interface FooterProps {
   onNavigateRosobrnadzor: () => void;
   onOpenBooking: () => void;
+  onOpenPrivacyPolicy?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigateRosobrnadzor, onOpenBooking }) => {
+export const Footer: React.FC<FooterProps> = ({
+  onNavigateRosobrnadzor,
+  onOpenBooking,
+  onOpenPrivacyPolicy,
+}) => {
   return (
     <footer className="w-full py-12 bg-surface-container-lowest border-t border-white/10 text-xs text-slate-400">
       <div className="max-w-7xl mx-auto px-4">
@@ -59,7 +64,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateRosobrnadzor, onOpenBo
               <li><a href="#autodrome" className="hover:text-white transition">Учебный автодром 2 ГА</a></li>
               <li><a href="#fleet" className="hover:text-white transition">Учебный автопарк</a></li>
               <li><a href="#classroom" className="hover:text-white transition">Учебные классы</a></li>
-              <li><span className="text-slate-500">Политика конфиденциальности (152-ФЗ)</span></li>
+              <li>
+                <button
+                  onClick={onOpenPrivacyPolicy}
+                  className="text-left text-slate-400 hover:text-white transition underline decoration-dotted"
+                >
+                  Политика конфиденциальности (152-ФЗ)
+                </button>
+              </li>
             </ul>
           </div>
 

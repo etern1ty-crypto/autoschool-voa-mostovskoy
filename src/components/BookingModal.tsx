@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, ArrowRight, Car, Phone, User } from 'lucide-react';
+import { X, CheckCircle2, ArrowRight, Car, Phone, User, MessageCircle } from 'lucide-react';
+import { SCHOOL_INFO } from '../data/autoschoolData';
 
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialTariff?: string;
+  onOpenPrivacyPolicy?: () => void;
 }
 
 export const BookingModal: React.FC<BookingModalProps> = ({
   isOpen,
   onClose,
   initialTariff = 'Категория «В»',
+  onOpenPrivacyPolicy,
 }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -37,6 +40,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     if (val.length >= 6) formatted += '-' + val.substring(6, 8);
     if (val.length >= 8) formatted += '-' + val.substring(8, 10);
     setPhone(formatted);
+  };
+
+  const getWhatsAppLink = () => {
+    const text = encodeURIComponent(
+      `Здравствуйте! Хочу записаться на обучение в автошколу ВОА.\n` +
+      `Программа: ${category}\n` +
+      `Имя: ${name || 'Не указано'}\n` +
+      `Телефон: ${phone || 'Не указан'}`
+    );
+    return `https://wa.me/79183278999?text=${text}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -66,7 +79,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         </button>
 
         {submitted ? (
-          <div className="text-center py-8 space-y-4">
+          <div className="text-center py-6 space-y-4">
             <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(16,185,129,0.3)]">
               <CheckCircle2 className="w-10 h-10" />
             </div>
@@ -76,12 +89,23 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed">
               Мы свяжемся с вами в течение 10 минут по номеру <strong className="text-national-red">{phone}</strong> для подтверждения записи и фиксации цены.
             </p>
-            <div className="pt-4">
+
+            <div className="pt-2 space-y-2">
+              <a
+                href={getWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Написать сразу в WhatsApp</span>
+              </a>
+
               <button
                 onClick={handleResetAndClose}
-                className="px-6 py-3 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition"
+                className="w-full py-2.5 rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition"
               >
-                Отлично
+                Закрыть окно
               </button>
             </div>
           </div>
@@ -169,7 +193,18 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   className="w-4 h-4 mt-0.5 rounded border-white/20 bg-surface-card text-national-red accent-national-red"
                 />
                 <span className="text-[10px] text-slate-400 leading-tight">
-                  Согласие на обработку персональных данных (ФЗ-152) и условия Политики конфиденциальности.
+                  Согласен на обработку персональных данных в соответствии с{' '}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (onOpenPrivacyPolicy) onOpenPrivacyPolicy();
+                    }}
+                    className="text-national-red underline hover:text-white transition"
+                  >
+                    Политикой конфиденциальности (ФЗ-152)
+                  </button>
+                  .
                 </span>
               </label>
             </div>

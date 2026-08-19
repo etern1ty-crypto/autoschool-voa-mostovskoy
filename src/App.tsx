@@ -11,10 +11,12 @@ import { ReviewsSection } from './components/ReviewsSection';
 import { ContactsSection } from './components/ContactsSection';
 import { RosobrnadzorSection } from './components/RosobrnadzorSection';
 import { BookingModal } from './components/BookingModal';
+import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [privacyPolicyOpen, setPrivacyPolicyOpen] = useState(false);
   const [selectedTariff, setSelectedTariff] = useState<string>('Категория «В»');
 
   const handleOpenBooking = (tariffTitle?: string) => {
@@ -94,6 +96,7 @@ export const App: React.FC = () => {
         <Footer
           onNavigateRosobrnadzor={handleNavigateRosobrnadzor}
           onOpenBooking={() => handleOpenBooking()}
+          onOpenPrivacyPolicy={() => setPrivacyPolicyOpen(true)}
         />
 
         {/* Booking Modal */}
@@ -101,6 +104,13 @@ export const App: React.FC = () => {
           isOpen={bookingOpen}
           onClose={() => setBookingOpen(false)}
           initialTariff={selectedTariff}
+          onOpenPrivacyPolicy={() => setPrivacyPolicyOpen(true)}
+        />
+
+        {/* Privacy Policy Modal (152-FZ) */}
+        <PrivacyPolicyModal
+          isOpen={privacyPolicyOpen}
+          onClose={() => setPrivacyPolicyOpen(false)}
         />
       </div>
     </AccessibilityProvider>
