@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Navigation } from 'lucide-react';
+import { ArrowRight, Navigation, Maximize2, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 interface AutodromeSectionProps {
   onOpenBooking: () => void;
@@ -17,7 +17,7 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
     <section id="autodrome" className="py-10 sm:py-20 bg-[#080A0F] relative border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-          {/* Autodrome Image: 100% clean */}
+          {/* Autodrome Image */}
           <div className="lg:col-span-6 relative">
             <div className="rounded-xl overflow-hidden border border-white/10 bg-surface-card shadow-2xl relative group">
               <img
@@ -26,6 +26,10 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
                 className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
+              <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs font-extrabold text-white flex items-center gap-1.5">
+                <Maximize2 className="w-3.5 h-3.5 text-national-red" />
+                <span>Площадь автодрома: 2 ГА</span>
+              </div>
             </div>
           </div>
 
@@ -33,17 +37,17 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
           <div className="lg:col-span-6 space-y-4 sm:space-y-5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <Navigation className="w-3.5 h-3.5" />
-              Экзаменационная площадка
+              Экзаменационная площадка ВОА
             </div>
 
             <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight">
-              Собственный автодром
+              Собственный закрытый автодром 2 ГА
             </h2>
 
             <div className="tech-line" />
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Обучение проходит на собственной закрытой асфальтированной площадке ВОА по адресу: <strong className="text-white">пгт. Мостовской, ул. Первомайская, д. 109</strong>. Точная разметка по стандартам ГИБДД, освещение, эстакада и учебные знаки позволяют подготовиться к практическому экзамену на 100%.
+              Практические занятия проходят на собственной закрытой асфальтированной площадке ВОА площадью <strong className="text-national-red font-bold">2 гектара (20 000 кв. м)</strong> по адресу: <strong className="text-white">пгт. Мостовской, ул. Кирова, д. 1Д</strong>. Просторная территория, точная разметка по стандартам ГИБДД, освещение, эстакада и учебные знаки гарантируют уверенную подготовку без очередей.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">

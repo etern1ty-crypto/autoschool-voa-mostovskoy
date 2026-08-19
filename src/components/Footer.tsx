@@ -53,10 +53,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateRosobrnadzor, onOpenBo
                   onClick={onNavigateRosobrnadzor}
                   className="text-left text-national-red hover:underline font-bold"
                 >
-                  Сведения об образовательной организации (Приказ № 831)
+                  Сведения об образовательной организации (273-ФЗ)
                 </button>
               </li>
-              <li><a href="#autodrome" className="hover:text-white transition">Учебный автодром</a></li>
+              <li><a href="#autodrome" className="hover:text-white transition">Учебный автодром 2 ГА</a></li>
               <li><a href="#fleet" className="hover:text-white transition">Учебный автопарк</a></li>
               <li><a href="#classroom" className="hover:text-white transition">Учебные классы</a></li>
               <li><span className="text-slate-500">Политика конфиденциальности (152-ФЗ)</span></li>

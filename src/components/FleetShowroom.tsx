@@ -23,12 +23,12 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
           Наш Автопарк
         </h2>
         <p className="text-xs sm:text-base text-slate-400 max-w-2xl mx-auto">
-          Ухоженные, технически исправные автомобили с дублирующими педалями, кондиционерами и сертификацией ГИБДД.
+          Ухоженные, технически исправные автомобили с сертифицированными дублирующими педалями и видеорегистрацией ГИБДД.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center mb-6 sm:mb-8">
-        {/* Car Specs Card (Без вкладки «Безопасность» по ТЗ) */}
+        {/* Car Specs Card */}
         <div className="order-2 lg:order-1 lg:col-span-5">
           <div className="dashboard-card p-5 sm:p-6 rounded-xl relative overflow-hidden">
             <AnimatePresence mode="wait">
@@ -71,6 +71,15 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
                   {activeCar.description}
                 </p>
 
+                <div className="space-y-1.5 pt-1">
+                  {activeCar.features.map((feat, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-xs text-slate-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-national-red" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+
                 <button
                   onClick={() => onSelectCar(activeCar.name)}
                   className="w-full py-3 rounded-sm bg-national-red text-white font-bold text-xs uppercase tracking-wider hover:bg-red-700 transition flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
@@ -83,7 +92,7 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
           </div>
         </div>
 
-        {/* Center Stage: Compact Car Image for Mobile Viewport */}
+        {/* Center Stage: Compact Car Image */}
         <div className="order-1 lg:order-2 lg:col-span-7 relative flex items-center justify-center p-2 sm:p-4 min-h-[220px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden">
           {/* Ambient Red Glow */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-national-red/20 rounded-full blur-[100px] pointer-events-none" />
@@ -109,7 +118,7 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
         </div>
       </div>
 
-      {/* Bottom Thumbnail Selector: Snap Scroll on Mobile */}
+      {/* Bottom Thumbnail Selector */}
       <div className="flex justify-start sm:justify-center gap-3 sm:gap-4 overflow-x-auto pb-2 pt-1 px-1 snap-x snap-mandatory">
         {VEHICLES_FLEET.map((car, idx) => (
           <button

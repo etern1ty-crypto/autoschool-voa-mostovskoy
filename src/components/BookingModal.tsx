@@ -90,7 +90,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider mb-2">
                 <Car className="w-3.5 h-3.5" />
-                Онлайн-запись в ВОА
+                Запись в автошколу ВОА
               </div>
               <h3 className="font-extrabold text-2xl text-white uppercase tracking-tight">
                 Записаться на обучение

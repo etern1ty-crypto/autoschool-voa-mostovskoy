@@ -35,16 +35,16 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-[11px] sm:text-xs font-extrabold uppercase tracking-wider mb-2 sm:mb-3">
             <Percent className="w-3.5 h-3.5" />
-            Официальный прейскурант
+            Официальный прейскурант от 01.01.2026
           </div>
           <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight">
             Стоимость обучения
           </h2>
           <p className="text-xs sm:text-base text-slate-400 mt-1.5 sm:mt-2">
-            Фиксированная цена в договоре. Полный курс теории, практика на автодроме и в городе, расходы на ГСМ (бензин) включены без скрытых доплат.
+            Фиксированная цена в договоре. Полный очный курс теории, практика на закрытом автодроме 2 га и в городе, честная рассрочка 0% без скрытых комиссий.
           </p>
 
-          {/* Navigation Tabs: Однострочный компактный вид на смартфонах */}
+          {/* Navigation Tabs */}
           <div className="flex items-center justify-center gap-1 sm:gap-2 mt-6 sm:mt-8 p-1 bg-surface-card rounded-lg border border-white/10 max-w-lg mx-auto">
             <button
               onClick={() => setActiveTab('prep')}
@@ -79,7 +79,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
           </div>
         </div>
 
-        {/* Animated Tabs: Горизонтальный свайп/карусель на смартфонах (snap-x) */}
+        {/* Animated Tabs */}
         <AnimatePresence mode="wait">
           {activeTab === 'prep' && (
             <motion.div
@@ -248,7 +248,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
           )}
         </AnimatePresence>
 
-        {/* 0% Installment Calculator: Компактный отступ mt-8 sm:mt-12 */}
+        {/* 0% Installment Calculator */}
         <div className="mt-8 sm:mt-12 dashboard-card rounded-2xl p-5 sm:p-8 border-white/10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             <div className="lg:col-span-6 space-y-3.5 sm:space-y-4">
