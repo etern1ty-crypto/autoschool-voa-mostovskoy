@@ -10,15 +10,22 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
   const mapContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (mapContainerRef.current) {
-      mapContainerRef.current.innerHTML = '';
+    const container = mapContainerRef.current;
+    if (container) {
+      container.innerHTML = '';
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.charset = 'utf-8';
       script.async = true;
       script.src =
         'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A030fb4e1f6367cc6c8f079911f84e66b16063b2a8a7e96c29e531d02781c388c&width=100%25&height=100%25&lang=ru_RU&scroll=true';
-      mapContainerRef.current.appendChild(script);
+      container.appendChild(script);
+
+      return () => {
+        if (container) {
+          container.innerHTML = '';
+        }
+      };
     }
   }, []);
 
@@ -39,135 +46,82 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
           </p>
         </div>
 
-        {/* 2-Column Equal Height Grid */}
+        {/* Unified 2-Column Responsive Layout with Matching Height */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left Column: Contact Cards + WhatsApp Button */}
-          <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
-            <div className="space-y-3.5">
-              {/* 1. Main Address */}
-              <div className="dashboard-card p-4 sm:p-5 rounded-xl border-white/10 flex items-start gap-4">
-                <div className="w-10 h-10 rounded bg-national-red/10 border border-national-red/30 flex items-center justify-center text-national-red shrink-0 mt-0.5">
-                  <MapPin className="w-5 h-5" />
+          {/* Left Column: Essential Contacts & Direct Action */}
+          <div className="lg:col-span-5 flex flex-col justify-between dashboard-card rounded-2xl p-6 sm:p-8 space-y-6 border-white/10">
+            <div className="space-y-6">
+              {/* Primary Address */}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-surface-card border border-white/10 flex items-center justify-center shrink-0 text-national-red shadow-inner">
+                  <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-national-red uppercase font-bold tracking-wider">
-                    Основной адрес (Офис и учебные классы):
-                  </div>
-                  <div className="text-white font-bold text-sm sm:text-base mt-0.5">
-                    {SCHOOL_INFO.primaryAddress}
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Центр посёлка, удобный подъезд и парковка</div>
+                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Главный офис и классы:</div>
+                  <div className="font-bold text-white text-base sm:text-lg mt-0.5">{SCHOOL_INFO.primaryAddress}</div>
+                  <div className="text-xs text-slate-400 mt-1">Автодром 2 га: {SCHOOL_INFO.autodromeAddress}</div>
                 </div>
               </div>
 
-              {/* 2. Secondary Address (Autodrome) */}
-              <div className="dashboard-card p-4 sm:p-5 rounded-xl border-white/10 flex items-start gap-4">
-                <div className="w-10 h-10 rounded bg-surface-card border border-white/10 flex items-center justify-center text-slate-300 shrink-0 mt-0.5">
-                  <MapPin className="w-5 h-5 text-national-red" />
+              {/* Working Hours */}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-surface-card border border-white/10 flex items-center justify-center shrink-0 text-white shadow-inner">
+                  <Clock className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-                    Учебный автодром (Практика, 2 ГА):
-                  </div>
-                  <div className="text-white font-bold text-sm sm:text-base mt-0.5">
-                    {SCHOOL_INFO.autodromeAddress}
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Собственная закрытая асфальтированная площадка 2 га</div>
+                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">График работы:</div>
+                  <div className="font-semibold text-white text-sm mt-0.5">{SCHOOL_INFO.workHours}</div>
+                  <div className="text-xs text-national-red font-medium mt-1">Вождение: {SCHOOL_INFO.practiceHours}</div>
                 </div>
               </div>
 
-              {/* 3. Phone */}
-              <div className="dashboard-card p-4 sm:p-5 rounded-xl border-white/10 flex items-start gap-4">
-                <div className="w-10 h-10 rounded bg-national-red/10 border border-national-red/30 flex items-center justify-center text-national-red shrink-0 mt-0.5">
-                  <Phone className="w-5 h-5" />
+              {/* Phone Direct */}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-surface-card border border-white/10 flex items-center justify-center shrink-0 text-national-red shadow-inner">
+                  <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-                    Телефон для записи и консультаций:
-                  </div>
+                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Прямой телефон:</div>
                   <a
                     href={`tel:${SCHOOL_INFO.phoneClean}`}
-                    className="text-white hover:text-national-red font-black text-lg sm:text-xl block mt-0.5 transition"
+                    className="font-extrabold text-white text-xl sm:text-2xl hover:text-national-red transition-colors block mt-0.5"
                   >
                     {SCHOOL_INFO.phone}
                   </a>
-                  <div className="text-[11px] text-slate-400">Нажмите для прямого звонка с телефона</div>
-                </div>
-              </div>
-
-              {/* 4. Hours */}
-              <div className="dashboard-card p-4 sm:p-5 rounded-xl border-white/10 flex items-start gap-4">
-                <div className="w-10 h-10 rounded bg-surface-card border border-white/10 flex items-center justify-center text-slate-300 shrink-0 mt-0.5">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
-                    Режим работы офиса:
-                  </div>
-                  <div className="text-white font-bold text-sm mt-0.5">
-                    {SCHOOL_INFO.workHours}
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">
-                    Вождение: <strong className="text-white">{SCHOOL_INFO.practiceHours}</strong>
-                  </div>
+                  <div className="text-xs text-slate-400 mt-0.5">Консультации и запись в учебные группы</div>
                 </div>
               </div>
             </div>
 
-            {/* WhatsApp Button */}
-            <div className="pt-2">
+            {/* Quick Action Buttons */}
+            <div className="pt-4 border-t border-white/10 space-y-3">
               <a
-                href="https://wa.me/79183278999"
+                href={`https://wa.me/${SCHOOL_INFO.phoneClean.replace('+', '')}?text=${encodeURIComponent('Здравствуйте! Хочу записаться на обучение в автошколу ВОА Мостовской.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-emerald-950/80 to-emerald-900/40 border border-emerald-500/40 text-white hover:border-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.3)] transition-all group"
+                className="w-full py-4 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30"
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-lg bg-emerald-500 text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                    <MessageCircle className="w-6 h-6" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-extrabold text-sm uppercase tracking-wider text-emerald-300 group-hover:text-white transition">
-                      Написать в WhatsApp
-                    </div>
-                    <div className="text-[11px] text-emerald-400/80">
-                      Быстрый ответ в чате • Консультация по записи
-                    </div>
-                  </div>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-300 group-hover:translate-x-1 transition-transform">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
+                <MessageCircle className="w-4 h-4" />
+                <span>Написать в WhatsApp</span>
               </a>
+
+              <button
+                onClick={onOpenBooking}
+                className="w-full py-4 rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
+              >
+                <span>Записаться онлайн</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
-          {/* Right Column: Yandex Map */}
-          <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
-            <div className="dashboard-card rounded-xl overflow-hidden border-white/10 flex-1 min-h-[420px] relative flex flex-col">
+          {/* Right Column: Embedded Yandex Constructor Map Matching Left Column Height */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="dashboard-card rounded-2xl p-2 border-white/10 overflow-hidden flex-1 flex flex-col min-h-[420px] lg:min-h-[500px]">
               <div
                 ref={mapContainerRef}
-                className="w-full h-full min-h-[420px] flex-1 [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:min-h-[420px] [&>ymaps]:!w-full [&>ymaps]:!h-full"
+                className="w-full flex-1 rounded-xl overflow-hidden min-h-[400px] lg:h-full [&>div]:w-full [&>div]:h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:border-0"
               />
-              <div className="absolute top-3 left-3 bg-[#080A0F]/90 backdrop-blur-md p-3 rounded-lg border border-white/10 text-xs text-white max-w-xs shadow-xl pointer-events-none z-10">
-                <div className="font-extrabold text-national-red uppercase text-[11px]">пгт. Мостовской</div>
-                <div className="text-slate-200 text-xs font-bold mt-0.5">ул. Красная, д. 88 (Учебные классы)</div>
-                <div className="text-slate-400 text-[10px] mt-0.5">Автодром 2 ГА: ул. Кирова, 1Д</div>
-              </div>
-            </div>
-
-            {/* Bottom Callout */}
-            <div className="p-4 sm:p-5 rounded-xl bg-surface-card border border-national-red/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <h4 className="font-extrabold text-white text-sm uppercase">Остались вопросы по обучению?</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Оставьте заявку, и мы перезвоним в течение 10 минут.</p>
-              </div>
-              <button
-                onClick={onOpenBooking}
-                className="px-6 py-3 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition shadow-lg shadow-national-red/30 shrink-0"
-              >
-                Задать вопрос
-              </button>
             </div>
           </div>
         </div>
