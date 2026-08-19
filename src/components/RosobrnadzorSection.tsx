@@ -58,7 +58,7 @@ export const RosobrnadzorSection: React.FC = () => {
         <div className="mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-[11px] sm:text-xs font-extrabold uppercase tracking-wider mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
-            Федеральный закон № 273-ФЗ • Приказ Рособрнадзора № 831
+            Федеральный закон № 273-ФЗ • Приказ Рособрнадзора № 1493 (ред. 2026)
           </div>
           <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight" itemProp="header">
             Сведения об образовательной организации
