@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="text-slate-400 hidden sm:inline">пгт. Мостовской, ул. Красная, 88</span>
             <span className="text-slate-500 hidden md:inline">|</span>
             <span className="text-slate-400 text-[11px] hidden md:flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-slate-500" /> Лицензия № 07894 • Автодром 2 ГА
+              <ShieldCheck className="w-3.5 h-3.5 text-slate-500" /> Лицензия № 07894 • Закрытый автодром
             </span>
           </div>
 
@@ -132,7 +132,7 @@ export const Header: React.FC<HeaderProps> = ({
           <nav className="flex flex-col gap-2 text-sm font-bold uppercase tracking-wider">
             <a href="#fleet" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded hover:bg-white/5 hover:text-national-red">Автопарк</a>
             <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded hover:bg-white/5 hover:text-national-red">Цены</a>
-            <a href="#autodrome" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded hover:bg-white/5 hover:text-national-red">Автодром 2 ГА</a>
+            <a href="#autodrome" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded hover:bg-white/5 hover:text-national-red">Автодром</a>
             <a href="#classroom" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded hover:bg-white/5 hover:text-national-red">Классы</a>
             <a href="#reviews" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded hover:bg-white/5 hover:text-national-red">Отзывы Drom.ru</a>
             <a href="#contacts" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded hover:bg-white/5 hover:text-national-red">Контакты</a>

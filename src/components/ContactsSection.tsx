@@ -42,7 +42,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
             Контакты автошколы
           </h2>
           <p className="text-slate-400 mt-2 text-sm max-w-2xl">
-            Центральный офис, учебные классы и закрытый учебный автодром 2 га Мостовского отделения ВОА.
+            Центральный офис, учебные классы и закрытый учебный автодром Мостовского отделения ВОА.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
                 <div>
                   <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Главный офис и классы:</div>
                   <div className="font-bold text-white text-base sm:text-lg mt-0.5">{SCHOOL_INFO.primaryAddress}</div>
-                  <div className="text-xs text-slate-400 mt-1">Автодром 2 га: {SCHOOL_INFO.autodromeAddress}</div>
+                  <div className="text-xs text-slate-400 mt-1">Автодром: {SCHOOL_INFO.autodromeAddress}</div>
                 </div>
               </div>
 

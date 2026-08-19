@@ -41,7 +41,7 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
             </div>
 
             <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight">
-              Собственный закрытый автодром 2 ГА
+              Собственный закрытый автодром
             </h2>
 
             <div className="tech-line" />
