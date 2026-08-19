@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="font-extrabold text-sm sm:text-base tracking-wider text-white flex items-center gap-1 uppercase">
               АВТОШКОЛА <span className="text-national-red">ВОА</span>
             </div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-widest text-slate-400 font-semibold">
+            <div className="text-xs uppercase tracking-widest text-slate-400 font-semibold">
               Мостовское отделение
             </div>
           </div>

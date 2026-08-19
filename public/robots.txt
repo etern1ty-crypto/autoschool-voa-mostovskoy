@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mostovskoevoa.ru/sitemap.xml
+Sitemap: https://autoschool-voa-mostovskoy.vercel.app/sitemap.xml

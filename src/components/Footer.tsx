@@ -29,10 +29,10 @@ export const Footer: React.FC<FooterProps> = ({
                 АВТОШКОЛА <span className="text-national-red">ВОА</span>
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-400 leading-relaxed">
               {SCHOOL_INFO.name}. Обучение водителей категорий А, В, С, переподготовка и восстановление навыков в Мостовском районе.
             </p>
-            <div className="text-[10px] text-slate-500">
+            <div className="text-xs text-slate-500">
               {SCHOOL_INFO.license}
             </div>
           </div>
@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Nav */}
           <div>
             <h4 className="font-extrabold text-white text-xs uppercase mb-3 tracking-wider">Обучение и цены</h4>
-            <ul className="space-y-2 text-[11px]">
+            <ul className="space-y-2 text-xs">
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «В» (Легковые авто) — 70 000 ₽</a></li>
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «А» (Мотоциклы) — 25 000 ₽</a></li>
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «С» (Грузовые ГАЗ) — 75 000 ₽</a></li>
@@ -52,7 +52,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Rosobrnadzor */}
           <div>
             <h4 className="font-extrabold text-white text-xs uppercase mb-3 tracking-wider">Официальный раздел</h4>
-            <ul className="space-y-2 text-[11px]">
+            <ul className="space-y-2 text-xs">
               <li>
                 <button
                   onClick={onNavigateRosobrnadzor}
@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           {/* Contacts */}
-          <div className="space-y-2 text-[11px]">
+          <div className="space-y-2 text-xs">
             <h4 className="font-extrabold text-white text-xs uppercase mb-3 tracking-wider">Контакты</h4>
             <div className="flex items-start gap-2">
               <MapPin className="w-3.5 h-3.5 text-national-red shrink-0 mt-0.5" />
@@ -91,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="pt-2">
               <button
                 onClick={onOpenBooking}
-                className="w-full py-2.5 rounded-sm bg-national-red text-white font-extrabold text-[11px] uppercase tracking-wider hover:bg-red-700 transition"
+                className="w-full min-h-[40px] py-2.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition flex items-center justify-center"
               >
                 Записаться в группу
               </button>
@@ -99,7 +99,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-slate-500">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <div>© {new Date().getFullYear()} Мостовское районное отделение ВОА. Все права защищены.</div>
           <div>Официальный сайт образовательной организации ВОА</div>
         </div>

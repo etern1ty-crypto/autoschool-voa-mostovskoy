@@ -40,9 +40,6 @@ export const ReviewsSection: React.FC = () => {
           className={`flex gap-6 w-max ${
             isPaused ? 'animate-none' : 'animate-marquee'
           }`}
-          style={{
-            animation: isPaused ? 'none' : 'marquee 45s linear infinite',
-          }}
         >
           {duplicatedReviews.map((rev, idx) => (
             <div

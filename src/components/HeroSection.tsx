@@ -1,60 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Award, Car, CheckCircle2 } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
-  onScrollToFleet: () => void;
-  onScrollToPricing: () => void;
+  onNavigateRosobrnadzor: () => void;
 }
 
-const slides = [
-  {
-    image: '/images/slider/autodrome.jpg',
-    tag: 'Собственный автодром',
-    caption: 'Просторная закрытая площадка для комфортных первых шагов и уверенной отработки упражнений.',
-  },
-  {
-    image: '/images/classroom/classroom-overview.jpg',
-    tag: 'Учебные аудитории',
-    caption: 'Оборудованные классы с наглядными стендами ПДД, устройством авто и медицинскими тренажерами.',
-  },
-  {
-    image: '/images/slider/exam-success.jpg',
-    tag: 'Сопровождение на экзамене',
-    caption: 'Организованная сдача экзамена в ГИБДД на знакомых автомобилях автошколы ВОА.',
-  },
-];
-
 export const HeroSection: React.FC<HeroSectionProps> = ({
-  onScrollToFleet,
-  onScrollToPricing,
+  onOpenBooking,
+  onNavigateRosobrnadzor,
 }) => {
   const [current, setCurrent] = useState(0);
 
+  const slides = [
+    {
+      image: '/images/slider/autodrome.jpg',
+      title: 'Собственный закрытый автодром',
+      badge: 'Учебная площадка по стандартам ГИБДД',
+    },
+    {
+      image: '/images/classroom/classroom-overview.jpg',
+      title: 'Оборудованные учебные аудитории',
+      badge: 'Интерактивные стенды и разбор билетов ПДД',
+    },
+    {
+      image: '/images/slider/exam-success.jpg',
+      title: 'Учебные автомобили Lada Granta, Datsun, ГАЗ',
+      badge: 'Дублирующие педали и видеорегистрация',
+    },
+  ];
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    return () => clearInterval(timer);
+  }, [slides.length]);
 
   return (
     <section id="hero" className="relative min-h-[580px] sm:min-h-[660px] md:min-h-[740px] flex items-center justify-center overflow-hidden mb-6 sm:mb-12">
       {/* Background Slideshow */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
-          <motion.div
+          <motion.img
             key={current}
+            src={slides[current].image}
+            alt="Автошкола ВОА Мостовской"
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slides[current].image})` }}
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </AnimatePresence>
 
@@ -73,78 +70,69 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Main Headline */}
-        <h1 className="font-black text-3xl sm:text-5xl md:text-6xl text-white mb-4 sm:mb-6 tracking-tight drop-shadow-2xl uppercase leading-[1.15]">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-national-red via-red-500 to-white">
-            Обучение вождению
-          </span>
-          <br />
-          в автошколе ВОА Мостовской
+        <h1 className="font-black text-3xl sm:text-5xl md:text-6xl text-white tracking-tight uppercase leading-[1.08] mb-5 sm:mb-6 drop-shadow-md max-w-3xl">
+          Обучение вождению в автошколе ВОА Мостовской
         </h1>
 
         {/* Subtitle */}
-        <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto mb-6 sm:mb-8 font-normal leading-relaxed">
-          Официальные программы подготовки водителей категорий «А», «В», «С». Оборудованные классы, закрытый автодром и внутренняя поэтапная оплата.
+        <p className="text-sm sm:text-lg text-slate-300 max-w-2xl mb-8 leading-relaxed drop-shadow">
+          Подготовка водителей категорий <strong className="text-white">«А», «В», «С»</strong> и профессиональная переподготовка. Собственный закрытый автодром, современный учебный автопарк и опытные преподаватели.
         </p>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+        {/* Actions */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-md">
           <button
-            onClick={onScrollToFleet}
-            className="w-full sm:w-auto min-h-[44px] bg-national-red text-white px-8 py-3.5 sm:py-4 rounded-sm font-extrabold uppercase tracking-wider text-xs hover:bg-red-700 transition-all hover:shadow-[0_0_30px_rgba(227,30,36,0.6)] transform hover:-translate-y-0.5 duration-200 flex items-center justify-center"
+            onClick={onOpenBooking}
+            className="w-full sm:w-auto flex-1 min-h-[44px] px-8 py-4 rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 shadow-xl shadow-national-red/30 cursor-pointer"
           >
-            Смотреть автопарк
+            <span>Записаться на обучение</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
+
           <button
-            onClick={onScrollToPricing}
-            className="w-full sm:w-auto min-h-[44px] bg-surface-card/90 border border-white/10 hover:border-national-red text-white px-8 py-3.5 sm:py-4 rounded-sm font-extrabold uppercase tracking-wider text-xs transition-all hover:bg-white/5 flex items-center justify-center"
+            onClick={onNavigateRosobrnadzor}
+            className="w-full sm:w-auto flex-1 min-h-[44px] px-6 py-4 rounded-sm bg-surface-card/90 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 border border-white/10 backdrop-blur-md flex items-center justify-center gap-2 cursor-pointer"
           >
-            Прейскурант и программы
+            <ShieldCheck className="w-4 h-4 text-national-red" />
+            <span>Сведения об автошколе</span>
           </button>
         </div>
 
-        {/* Minimalist Slide Caption below buttons */}
-        <div className="mt-8 sm:mt-10 max-w-xl text-center">
-          <div className="text-national-red text-xs font-extrabold uppercase tracking-widest mb-1">
-            {slides[current].tag}
+        {/* Key Indicators */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-10 sm:mt-14 w-full text-left">
+          <div className="dashboard-card p-3.5 sm:p-4 rounded-xl border-white/10 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-xs font-bold text-white uppercase mb-1">
+              <Award className="w-4 h-4 text-national-red" />
+              <span>Лицензия</span>
+            </div>
+            <p className="text-xs text-slate-400">Бессрочная лицензия МОН КК</p>
           </div>
-          <p className="text-xs sm:text-sm text-slate-300 font-medium leading-snug drop-shadow-md">
-            {slides[current].caption}
-          </p>
-        </div>
 
-        {/* Desktop Controls */}
-        <div className="hidden sm:flex items-center justify-center gap-3 mt-6">
-          <button
-            onClick={prevSlide}
-            aria-label="Предыдущий слайд"
-            className="p-2.5 rounded bg-black/40 border border-white/10 text-white hover:bg-national-red transition min-w-[44px] min-h-[44px] flex items-center justify-center"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <div className="flex gap-2">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Перейти к слайду ${i + 1}`}
-                onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  current === i ? 'w-8 bg-national-red' : 'w-2 bg-white/30'
-                }`}
-              />
-            ))}
+          <div className="dashboard-card p-3.5 sm:p-4 rounded-xl border-white/10 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-xs font-bold text-white uppercase mb-1">
+              <Car className="w-4 h-4 text-national-red" />
+              <span>Автопарк</span>
+            </div>
+            <p className="text-xs text-slate-400">Granta, Datsun, Kalina, ГАЗ</p>
           </div>
-          <button
-            onClick={nextSlide}
-            aria-label="Следующий слайд"
-            className="p-2.5 rounded bg-black/40 border border-white/10 text-white hover:bg-national-red transition min-w-[44px] min-h-[44px] flex items-center justify-center"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
+
+          <div className="dashboard-card p-3.5 sm:p-4 rounded-xl border-white/10 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-xs font-bold text-white uppercase mb-1">
+              <CheckCircle2 className="w-4 h-4 text-national-red" />
+              <span>Поэтапно</span>
+            </div>
+            <p className="text-xs text-slate-400">Оплата частями на весь курс</p>
+          </div>
+
+          <div className="dashboard-card p-3.5 sm:p-4 rounded-xl border-white/10 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-xs font-bold text-white uppercase mb-1">
+              <ShieldCheck className="w-4 h-4 text-national-red" />
+              <span>Экзамен</span>
+            </div>
+            <p className="text-xs text-slate-400">Сопровождение в ГИБДД</p>
+          </div>
         </div>
       </div>
-
-      {/* Kinetic Red Bottom Divider */}
-      <div className="absolute bottom-0 left-0 w-full h-1 kinetic-gradient z-20" />
     </section>
   );
 };

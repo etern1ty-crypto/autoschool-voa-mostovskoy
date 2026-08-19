@@ -61,8 +61,7 @@ export const App: React.FC = () => {
           {/* 1. Hero Slideshow with Kinetic Red Gradient Divider */}
           <HeroSection
             onOpenBooking={() => handleOpenBooking()}
-            onScrollToFleet={handleScrollToFleet}
-            onScrollToPricing={handleScrollToPricing}
+            onNavigateRosobrnadzor={handleNavigateRosobrnadzor}
           />
 
           {/* 2. Fleet Showroom: Center Stage with Dashboard Cards and 3D Tilt Selector */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, ArrowRight, Car, Phone, User, MessageCircle } from 'lucide-react';
+import { X, CheckCircle2, ArrowRight, Car, Phone, User, Mail, MapPin } from 'lucide-react';
 import { SCHOOL_INFO } from '../data/autoschoolData';
 
 interface BookingModalProps {
@@ -60,16 +60,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     setErrorMsg('');
   };
 
-  const getWhatsAppLink = () => {
-    const text = encodeURIComponent(
-      `Здравствуйте! Хочу записаться на обучение в автошколу ВОА Мостовской.\n` +
-      `Выбранный курс/автомобиль: ${category}\n` +
-      `Имя: ${name.trim() || 'Не указано'}\n` +
-      `Телефон: ${phone || 'Не указан'}`
-    );
-    return `https://wa.me/79183278999?text=${text}`;
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed) {
@@ -82,9 +72,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
     setErrorMsg('');
     setSubmitted(true);
-    try {
-      window.open(getWhatsAppLink(), '_blank', 'noopener,noreferrer');
-    } catch (_) {}
   };
 
   const handleResetAndClose = () => {
@@ -111,7 +98,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           type="button"
           onClick={handleResetAndClose}
           aria-label="Закрыть окно записи"
-          className="absolute top-5 right-5 p-2 rounded bg-surface-card text-slate-400 hover:text-white hover:bg-white/10 transition"
+          className="absolute top-5 right-5 p-2 rounded bg-surface-card text-slate-400 hover:text-white hover:bg-white/10 transition min-w-[36px] min-h-[36px] flex items-center justify-center"
         >
           <X className="w-5 h-5" />
         </button>
@@ -125,26 +112,35 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               Заявка принята!
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed">
-              Мы свяжемся с вами в течение рабочего времени по номеру <strong className="text-national-red">{phone}</strong> для подтверждения записи.
+              Мы свяжемся с вами в течение рабочего дня по номеру <strong className="text-national-red">{phone}</strong> для консультации по курсу <strong>{category}</strong>.
             </p>
+
+            <div className="p-3.5 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-1.5 text-left">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-national-red shrink-0" />
+                <span>Учебная часть: {SCHOOL_INFO.primaryAddress}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-national-red shrink-0" />
+                <span>Телефон: {SCHOOL_INFO.phone}</span>
+              </div>
+            </div>
 
             <div className="pt-2 space-y-2">
               <a
-                href={getWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3.5 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg"
+                href={`tel:${SCHOOL_INFO.phoneClean}`}
+                className="w-full min-h-[44px] rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Открыть диалог в WhatsApp</span>
+                <Phone className="w-4 h-4" />
+                <span>Позвонить в учебную часть: {SCHOOL_INFO.phone}</span>
               </a>
 
               <a
-                href={`tel:${SCHOOL_INFO.phoneClean}`}
-                className="w-full py-2.5 rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2"
+                href={`mailto:${SCHOOL_INFO.email}?subject=${encodeURIComponent(`Заявка на обучение: ${category}`)}&body=${encodeURIComponent(`Имя: ${name}\nТелефон: ${phone}\nПрограмма: ${category}`)}`}
+                className="w-full min-h-[44px] rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2"
               >
-                <Phone className="w-3.5 h-3.5 text-national-red" />
-                <span>Позвонить напрямую: {SCHOOL_INFO.phone}</span>
+                <Mail className="w-4 h-4 text-national-red" />
+                <span>Написать на email: {SCHOOL_INFO.email}</span>
               </a>
 
               <button
@@ -266,7 +262,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             <button
               type="submit"
-              className="w-full py-4 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition shadow-lg shadow-national-red/30 flex items-center justify-center gap-2 mt-2"
+              className="w-full min-h-[44px] py-4 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition shadow-lg shadow-national-red/30 flex items-center justify-center gap-2 mt-2"
             >
               <span>Отправить заявку</span>
               <ArrowRight className="w-4 h-4" />

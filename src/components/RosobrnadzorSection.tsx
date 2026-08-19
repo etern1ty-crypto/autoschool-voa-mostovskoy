@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ROSOBRNADZOR_DATA, RosobrnadzorDoc } from '../data/rosobrnadzorData';
+import { ROSOBRNADZOR_DATA } from '../data/rosobrnadzorData';
 import { DRIVER_PREPARATION_TARIFFS } from '../data/autoschoolData';
 import {
   Building2,
@@ -44,12 +44,6 @@ export const RosobrnadzorSection: React.FC = () => {
     { id: 'standards', num: '14', title: 'Образовательные стандарты и требования', icon: BookOpen },
   ];
 
-  const handleOpenDoc = (doc: RosobrnadzorDoc) => {
-    if (doc.url.startsWith('/') || doc.url.startsWith('http')) {
-      window.open(doc.url, '_blank', 'noopener,noreferrer');
-    }
-  };
-
   return (
     <section
       id="rosobrnadzor"
@@ -86,7 +80,7 @@ export const RosobrnadzorSection: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`w-full text-left p-3 rounded-lg font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-between gap-3 ${
+                  className={`w-full text-left p-3 rounded-lg font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-between gap-3 min-h-[44px] ${
                     isActive
                       ? 'bg-national-red text-white shadow-lg shadow-national-red/30'
                       : 'bg-surface-card text-slate-300 border border-white/10 hover:border-national-red/50 hover:text-white'
@@ -162,19 +156,13 @@ export const RosobrnadzorSection: React.FC = () => {
                       <div className="flex items-start gap-2">
                         <MapPin className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
                         <div>
-                          <strong>Учебные классы (теоретическая подготовка):</strong> {ROSOBRNADZOR_DATA.common.classroomAddress}
+                          <strong>Учебные кабинеты (теория):</strong> {ROSOBRNADZOR_DATA.common.classroomAddress}
                         </div>
                       </div>
                       <div className="flex items-start gap-2">
                         <MapPin className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
                         <div>
-                          <strong>Учебная площадка (по реестру лицензий):</strong> {ROSOBRNADZOR_DATA.common.cooperativeAddress}
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <MapPin className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
-                        <div>
-                          <strong>Закрытый учебный автодром ВОА (практика):</strong> {ROSOBRNADZOR_DATA.common.autodromeAddress}
+                          <strong>Учебная площадка / автодром (практика):</strong> {ROSOBRNADZOR_DATA.common.autodromeAddress}
                         </div>
                       </div>
                     </div>
@@ -187,6 +175,13 @@ export const RosobrnadzorSection: React.FC = () => {
                     </div>
                     <div className="text-xs text-slate-400 mt-0.5">
                       Орган, выдавший лицензию: {ROSOBRNADZOR_DATA.common.licenseAuthority} (Статус: {ROSOBRNADZOR_DATA.common.licenseStatus})
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded bg-surface-card border border-white/10">
+                    <div className="text-xs text-slate-400 uppercase font-bold mb-1">Государственная аккредитация:</div>
+                    <div className="text-slate-300">
+                      {ROSOBRNADZOR_DATA.common.accreditationStatus}
                     </div>
                   </div>
 
@@ -248,7 +243,7 @@ export const RosobrnadzorSection: React.FC = () => {
                       <div className="text-xs text-national-red uppercase font-bold mb-0.5">{item.status}</div>
                       <div className="font-bold text-white text-sm">{item.name}</div>
                       {item.person && (
-                        <div className="text-white font-semibold text-xs mt-1">Руководитель: {item.person}</div>
+                        <div className="text-white font-semibold text-xs mt-1">Руководитель / Ответственный: {item.person}</div>
                       )}
                       {item.competence && (
                         <div className="text-slate-400 text-xs mt-1">{item.competence}</div>
@@ -283,10 +278,12 @@ export const RosobrnadzorSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   {ROSOBRNADZOR_DATA.documentsList.map((doc, idx) => (
-                    <button
+                    <a
                       key={idx}
-                      onClick={() => handleOpenDoc(doc)}
-                      className="p-3.5 rounded bg-surface-card border border-white/10 hover:border-national-red transition-all flex items-start justify-between gap-3 text-left group"
+                      href={doc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3.5 rounded bg-surface-card border border-white/10 hover:border-national-red transition-all flex items-start justify-between gap-3 text-left group min-h-[44px]"
                     >
                       <div className="flex items-start gap-2.5">
                         <FileText className="w-4 h-4 text-national-red shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
@@ -301,7 +298,7 @@ export const RosobrnadzorSection: React.FC = () => {
                         {doc.fileType}
                         <ExternalLink className="w-3 h-3 text-slate-400" />
                       </span>
-                    </button>
+                    </a>
                   ))}
                 </div>
 
@@ -327,7 +324,7 @@ export const RosobrnadzorSection: React.FC = () => {
                   <div><strong>Уровень образования:</strong> Профессиональное обучение / Дополнительное образование</div>
                   <div><strong>Форма обучения:</strong> Очная (в оборудованных учебных аудиториях и на автодроме)</div>
                   <div><strong>Язык образования:</strong> Русский (в соответствии со ст. 14 ФЗ № 273-ФЗ)</div>
-                  <div><strong>Государственная аккредитация:</strong> Для основных программ профессионального обучения государственная аккредитация законодательством РФ не предусмотрена.</div>
+                  <div><strong>Государственная аккредитация:</strong> {ROSOBRNADZOR_DATA.common.accreditationStatus}</div>
                   <div><strong>Численность обучающихся:</strong> Обучение за счет бюджетных средств не ведется (100% по договорам за счет физ./юр. лиц).</div>
                 </div>
 
@@ -370,13 +367,13 @@ export const RosobrnadzorSection: React.FC = () => {
                 <div className="space-y-3 text-xs">
                   <div className="p-4 rounded bg-surface-card border border-white/10 space-y-2">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h4 className="font-extrabold text-white text-base">Круц Павел Викторович</h4>
+                      <h4 className="font-extrabold text-white text-base">Кудинов Владислав Викторович</h4>
                       <span className="px-2.5 py-0.5 rounded bg-national-red/20 text-national-red font-bold text-xs">
-                        Директор автошколы
+                        Председатель Мостовского РО ВОА (Руководитель)
                       </span>
                     </div>
                     <div className="space-y-1 text-slate-300">
-                      <div><span className="text-slate-400">Должность:</span> Руководитель образовательного подразделения / Директор</div>
+                      <div><span className="text-slate-400">Должность:</span> Единоличный руководитель организации и образовательного процесса</div>
                       <div><span className="text-slate-400">Контактный телефон:</span> <a href={`tel:${ROSOBRNADZOR_DATA.common.phoneClean}`} className="text-white hover:text-national-red font-bold">{ROSOBRNADZOR_DATA.common.phone}</a></div>
                       <div><span className="text-slate-400">Электронная почта:</span> <a href={`mailto:${ROSOBRNADZOR_DATA.common.email}`} className="text-white hover:text-national-red font-bold">{ROSOBRNADZOR_DATA.common.email}</a></div>
                     </div>
@@ -384,13 +381,13 @@ export const RosobrnadzorSection: React.FC = () => {
 
                   <div className="p-4 rounded bg-surface-card border border-white/10 space-y-2">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h4 className="font-extrabold text-white text-base">Кудинов Владислав Викторович</h4>
+                      <h4 className="font-extrabold text-white text-base">Круц Павел Викторович</h4>
                       <span className="px-2.5 py-0.5 rounded bg-white/10 text-slate-300 font-bold text-xs">
-                        Председатель отделения ВОА
+                        Заведующий учебной частью, преподаватель
                       </span>
                     </div>
                     <div className="space-y-1 text-slate-300">
-                      <div><span className="text-slate-400">Должность:</span> Председатель Мостовского РО КРО ООО «ВОА»</div>
+                      <div><span className="text-slate-400">Должность:</span> Организация учебного процесса, преподаватель дисциплин ПДД</div>
                       <div><span className="text-slate-400">Контактный телефон:</span> {ROSOBRNADZOR_DATA.common.phone}</div>
                       <div><span className="text-slate-400">Электронная почта:</span> {ROSOBRNADZOR_DATA.common.email}</div>
                     </div>
@@ -462,7 +459,7 @@ export const RosobrnadzorSection: React.FC = () => {
                   <div className="p-4 rounded bg-surface-card border border-white/10 space-y-1.5">
                     <div className="font-bold text-white text-sm">1. Оборудованные учебные кабинеты:</div>
                     <p className="text-slate-300">
-                      Адрес: <strong className="text-white">пгт. Мостовской, ул. Красная, д. 88</strong>.
+                      Адрес: <strong className="text-white">{ROSOBRNADZOR_DATA.common.classroomAddress}</strong>.
                     </p>
                     <p className="text-slate-400">
                       Оснащение: мультимедийные проекторы, электрифицированные стенды по ПДД РФ, учебные тренажеры первой помощи «Максим», наглядные макеты узлов, деталей и механизмов ТС, автоматизированные места для сдачи тестов.
@@ -472,10 +469,10 @@ export const RosobrnadzorSection: React.FC = () => {
                   <div className="p-4 rounded bg-surface-card border border-white/10 space-y-1.5">
                     <div className="font-bold text-white text-sm">2. Закрытый учебный автодром (объект практических занятий):</div>
                     <p className="text-slate-300">
-                      Адрес: <strong className="text-white">пгт. Мостовской, ул. Кирова, д. 1Д</strong>.
+                      Адрес: <strong className="text-white">{ROSOBRNADZOR_DATA.common.autodromeAddress}</strong>.
                     </p>
                     <p className="text-slate-400">
-                      Площадь: <strong className="text-national-red font-bold">2 га (20 000 кв. м)</strong>. Асфальтобетонное покрытие, ограждение по периметру, наклонный участок (эстакада) по ГОСТ, освещение, учебные переносные дорожные знаки и разметка.
+                      Асфальтобетонное покрытие, ограждение по периметру, наклонный участок (эстакада) по ГОСТ, освещение, учебные переносные дорожные знаки и разметка.
                     </p>
                   </div>
 
