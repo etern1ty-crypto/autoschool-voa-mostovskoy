@@ -44,14 +44,17 @@ export const App: React.FC = () => {
   return (
     <AccessibilityProvider>
       <div className="min-h-screen bg-[#080A0F] text-[#dfe2ee] flex flex-col selection:bg-national-red selection:text-white">
-        {/* Top Accessibility Bar for Visually Impaired (ГОСТ Р 52872-2012) */}
-        <AccessibilityBar />
+        {/* Sticky Header & Accessibility Bar Container (Zero Conflict) */}
+        <div className="sticky top-0 z-50 w-full shadow-lg">
+          {/* Top Accessibility Bar for Visually Impaired (ГОСТ Р 52872-2012) */}
+          <AccessibilityBar />
 
-        {/* Precision Navigation Header */}
-        <Header
-          onOpenBooking={() => handleOpenBooking()}
-          onNavigateRosobrnadzor={handleNavigateRosobrnadzor}
-        />
+          {/* Precision Navigation Header */}
+          <Header
+            onOpenBooking={() => handleOpenBooking()}
+            onNavigateRosobrnadzor={handleNavigateRosobrnadzor}
+          />
+        </div>
 
         {/* Main Content */}
         <main className="flex-grow">
@@ -67,7 +70,7 @@ export const App: React.FC = () => {
             onSelectCar={(carName) => handleOpenBooking(`Автомобиль: ${carName}`)}
           />
 
-          {/* 3. Official Prices & Tariffs + 0% Installment Calculator */}
+          {/* 3. Official Prices & Tariffs */}
           <PricingSection
             onSelectTariff={(tariffName) => handleOpenBooking(tariffName)}
           />
@@ -80,15 +83,15 @@ export const App: React.FC = () => {
           {/* 5. Real Classroom & Educational Base */}
           <ClassroomSection />
 
-          {/* 6. Verified Reviews on Drom.ru (Infinite Marquee) */}
+          {/* 6. Verified Reviews (Infinite Marquee) */}
           <ReviewsSection />
 
-          {/* 7. Contacts, Office, Map & Messengers (Сначала Контакты и Карта) */}
+          {/* 7. Contacts, Office, Map & Messengers */}
           <ContactsSection
             onOpenBooking={() => handleOpenBooking('Консультация')}
           />
 
-          {/* 8. Mandatory Rosobrnadzor Section (Затем Сведения об образовательной организации) */}
+          {/* 8. Mandatory Rosobrnadzor Section */}
           <RosobrnadzorSection />
         </main>
 

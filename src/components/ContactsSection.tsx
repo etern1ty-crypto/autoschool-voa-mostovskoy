@@ -56,10 +56,17 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
                 <div className="w-12 h-12 rounded-xl bg-surface-card border border-white/10 flex items-center justify-center shrink-0 text-national-red shadow-inner">
                   <MapPin className="w-6 h-6" />
                 </div>
-                <div>
-                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Главный офис и классы:</div>
-                  <div className="font-bold text-white text-base sm:text-lg mt-0.5">{SCHOOL_INFO.primaryAddress}</div>
-                  <div className="text-xs text-slate-400 mt-1">Автодром: {SCHOOL_INFO.autodromeAddress}</div>
+                <div className="space-y-1">
+                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Адреса организации:</div>
+                  <div className="font-bold text-white text-sm sm:text-base">
+                    Главный офис и классы: <span className="font-normal text-slate-200">{SCHOOL_INFO.primaryAddress}</span>
+                  </div>
+                  <div className="text-xs text-slate-300">
+                    Учебная площадка (реестр): <span className="text-slate-400">{SCHOOL_INFO.cooperativeAddress}</span>
+                  </div>
+                  <div className="text-xs text-slate-300">
+                    Закрытый автодром ВОА: <span className="text-slate-400">{SCHOOL_INFO.autodromeAddress}</span>
+                  </div>
                 </div>
               </div>
 
@@ -99,7 +106,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
                 href={`https://wa.me/${SCHOOL_INFO.phoneClean.replace('+', '')}?text=${encodeURIComponent('Здравствуйте! Хочу записаться на обучение в автошколу ВОА Мостовской.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30"
+                className="w-full min-h-[44px] py-4 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Написать в WhatsApp</span>
@@ -107,7 +114,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
 
               <button
                 onClick={onOpenBooking}
-                className="w-full py-4 rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
+                className="w-full min-h-[44px] py-4 rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
               >
                 <span>Записаться онлайн</span>
                 <ArrowRight className="w-4 h-4" />

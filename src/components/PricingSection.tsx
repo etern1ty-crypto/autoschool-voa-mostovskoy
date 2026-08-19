@@ -14,7 +14,7 @@ interface PricingSectionProps {
 export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }) => {
   const [activeTab, setActiveTab] = useState<'prep' | 'retrain' | 'practice'>('prep');
 
-  // 0% Installment Calculator State
+  // Installment Calculator State
   const [calcCategory, setCalcCategory] = useState<string>('cat-b');
   const [calcMonths, setCalcMonths] = useState<number>(3);
   const [initialPayment, setInitialPayment] = useState<number>(15000);
@@ -33,22 +33,22 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-[11px] sm:text-xs font-extrabold uppercase tracking-wider mb-2 sm:mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-extrabold uppercase tracking-wider mb-2 sm:mb-3">
             <Percent className="w-3.5 h-3.5" />
-            Официальный прейскурант от 01.01.2026
+            Официальный прейскурант цен
           </div>
           <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight">
             Стоимость обучения
           </h2>
           <p className="text-xs sm:text-base text-slate-400 mt-1.5 sm:mt-2">
-            Фиксированная цена в договоре. Полный очный курс теории, практика на закрытом автодроме и в городе, честная рассрочка 0% без скрытых комиссий.
+            Фиксированная стоимость в договоре. Полный очный курс теории, практика на закрытом автодроме и в городе, возможность поэтапной оплаты.
           </p>
 
           {/* Navigation Tabs */}
           <div className="flex items-center justify-center gap-1 sm:gap-2 mt-6 sm:mt-8 p-1 bg-surface-card rounded-lg border border-white/10 max-w-lg mx-auto">
             <button
               onClick={() => setActiveTab('prep')}
-              className={`flex-1 py-2.5 sm:py-3 px-1.5 sm:px-3 rounded text-[10px] sm:text-xs uppercase font-extrabold tracking-tight sm:tracking-wider transition-all whitespace-nowrap ${
+              className={`flex-1 py-3 px-3 rounded text-xs uppercase font-extrabold tracking-wider transition-all whitespace-nowrap min-h-[44px] flex items-center justify-center ${
                 activeTab === 'prep'
                   ? 'bg-national-red text-white shadow-lg shadow-national-red/30'
                   : 'text-slate-400 hover:text-white'
@@ -58,7 +58,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
             </button>
             <button
               onClick={() => setActiveTab('retrain')}
-              className={`flex-1 py-2.5 sm:py-3 px-1.5 sm:px-3 rounded text-[10px] sm:text-xs uppercase font-extrabold tracking-tight sm:tracking-wider transition-all whitespace-nowrap ${
+              className={`flex-1 py-3 px-3 rounded text-xs uppercase font-extrabold tracking-wider transition-all whitespace-nowrap min-h-[44px] flex items-center justify-center ${
                 activeTab === 'retrain'
                   ? 'bg-national-red text-white shadow-lg shadow-national-red/30'
                   : 'text-slate-400 hover:text-white'
@@ -68,7 +68,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
             </button>
             <button
               onClick={() => setActiveTab('practice')}
-              className={`flex-1 py-2.5 sm:py-3 px-1.5 sm:px-3 rounded text-[10px] sm:text-xs uppercase font-extrabold tracking-tight sm:tracking-wider transition-all whitespace-nowrap ${
+              className={`flex-1 py-3 px-3 rounded text-xs uppercase font-extrabold tracking-wider transition-all whitespace-nowrap min-h-[44px] flex items-center justify-center ${
                 activeTab === 'practice'
                   ? 'bg-national-red text-white shadow-lg shadow-national-red/30'
                   : 'text-slate-400 hover:text-white'
@@ -88,12 +88,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory px-1"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
             >
               {DRIVER_PREPARATION_TARIFFS.map((tariff) => (
                 <div
                   key={tariff.id}
-                  className={`dashboard-card min-w-[280px] sm:min-w-0 flex-1 rounded-xl p-5 sm:p-6 flex flex-col justify-between transition-all snap-center shrink-0 md:shrink ${
+                  className={`dashboard-card rounded-xl p-5 sm:p-6 flex flex-col justify-between transition-all ${
                     tariff.popular
                       ? 'border-national-red shadow-[0_0_20px_rgba(227,30,36,0.25)]'
                       : 'border-white/10 hover:border-national-red/50'
@@ -104,7 +104,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                       <h3 className="font-extrabold text-lg sm:text-xl text-white uppercase tracking-tight">
                         {tariff.title}
                       </h3>
-                      <span className="px-2 py-0.5 rounded bg-surface-card text-national-red text-[10px] sm:text-[11px] font-bold border border-national-red/30">
+                      <span className="px-2 py-0.5 rounded bg-surface-card text-national-red text-xs font-bold border border-national-red/30">
                         {tariff.transmission}
                       </span>
                     </div>
@@ -135,7 +135,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
 
                   <button
                     onClick={() => onSelectTariff(tariff.title, tariff.price)}
-                    className={`w-full py-3 sm:py-3.5 rounded-sm font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
+                    className={`w-full min-h-[44px] py-3.5 rounded-sm font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                       tariff.popular
                         ? 'bg-national-red text-white hover:bg-red-700 shadow-lg shadow-national-red/40'
                         : 'bg-surface-card text-white hover:bg-national-red border border-white/10'
@@ -156,12 +156,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="flex md:grid md:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory px-1"
+              className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
             >
               {RETRAINING_PROGRAMS.map((item) => (
                 <div
                   key={item.id}
-                  className="dashboard-card min-w-[280px] sm:min-w-0 flex-1 rounded-xl p-5 sm:p-6 border-white/10 hover:border-national-red/50 flex flex-col justify-between snap-center shrink-0 md:shrink"
+                  className="dashboard-card rounded-xl p-5 sm:p-6 border-white/10 hover:border-national-red/50 flex flex-col justify-between"
                 >
                   <div>
                     <h3 className="font-extrabold text-lg sm:text-xl text-white uppercase tracking-tight mb-2">
@@ -188,7 +188,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
 
                   <button
                     onClick={() => onSelectTariff(item.title, item.price)}
-                    className="w-full py-3 sm:py-3.5 rounded-sm bg-surface-card text-white hover:bg-national-red font-bold text-xs uppercase tracking-wider border border-white/10 transition"
+                    className="w-full min-h-[44px] py-3.5 rounded-sm bg-surface-card text-white hover:bg-national-red font-bold text-xs uppercase tracking-wider border border-white/10 transition flex items-center justify-center"
                   >
                     Подать заявку
                   </button>
@@ -204,12 +204,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="flex md:grid md:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory px-1"
+              className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
             >
               {PRACTICE_SERVICES.map((item) => (
                 <div
                   key={item.id}
-                  className="dashboard-card min-w-[280px] sm:min-w-0 flex-1 rounded-xl p-5 sm:p-6 border-white/10 hover:border-national-red/50 flex flex-col justify-between snap-center shrink-0 md:shrink"
+                  className="dashboard-card rounded-xl p-5 sm:p-6 border-white/10 hover:border-national-red/50 flex flex-col justify-between"
                 >
                   <div>
                     <h3 className="font-extrabold text-lg sm:text-xl text-white uppercase tracking-tight mb-1">
@@ -238,7 +238,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
 
                   <button
                     onClick={() => onSelectTariff(`Доп. вождение: ${item.title}`, item.pricePerHour)}
-                    className="w-full py-3 sm:py-3.5 rounded-sm bg-surface-card text-white hover:bg-national-red font-bold text-xs uppercase tracking-wider border border-white/10 transition"
+                    className="w-full min-h-[44px] py-3.5 rounded-sm bg-surface-card text-white hover:bg-national-red font-bold text-xs uppercase tracking-wider border border-white/10 transition flex items-center justify-center"
                   >
                     Записаться на занятие
                   </button>
@@ -248,30 +248,31 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
           )}
         </AnimatePresence>
 
-        {/* 0% Installment Calculator */}
+        {/* Installment Calculator */}
         <div className="mt-8 sm:mt-12 dashboard-card rounded-2xl p-5 sm:p-8 border-white/10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             <div className="lg:col-span-6 space-y-3.5 sm:space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider">
                 <Calculator className="w-3.5 h-3.5" />
-                Рассрочка 0% без банков
+                Поэтапная оплата обучения
               </div>
               <h3 className="font-extrabold text-xl sm:text-3xl text-white uppercase tracking-tight">
                 Учитесь сейчас — платите частями
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Внутренняя честная рассрочка от автошколы ВОА. Без процентов, переплат и скрытых комиссий. Оплачивайте равными частями во время обучения.
+                Внутренняя поэтапная оплата от автошколы ВОА. Оплата вносится равными долями в кассу автошколы на протяжении периода обучения. Без участия кредитных организаций.
               </p>
 
               <div className="space-y-3.5 sm:space-y-4 pt-1">
                 <div>
-                  <label className="block text-[11px] sm:text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+                  <label htmlFor="calc-category" className="block text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
                     Категория обучения:
                   </label>
                   <select
+                    id="calc-category"
                     value={calcCategory}
                     onChange={(e) => setCalcCategory(e.target.value)}
-                    className="w-full px-3.5 py-2.5 sm:py-3 rounded bg-surface-card border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-national-red transition-colors"
+                    className="w-full px-3.5 py-3 rounded bg-surface-card border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:border-national-red transition-colors"
                   >
                     {DRIVER_PREPARATION_TARIFFS.map((t) => (
                       <option key={t.id} value={t.id}>
@@ -301,13 +302,14 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                     step="5000"
                     value={initialPayment}
                     onChange={(e) => setInitialPayment(Number(e.target.value))}
+                    aria-label="Размер первого взноса"
                     className="w-full accent-national-red h-2 bg-surface-card rounded cursor-pointer"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] sm:text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
-                    Срок рассрочки:
+                  <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+                    Срок поэтапной оплаты:
                   </label>
                   <div className="grid grid-cols-3 gap-2">
                     {[2, 3, 4].map((m) => (
@@ -315,7 +317,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                         key={m}
                         type="button"
                         onClick={() => setCalcMonths(m)}
-                        className={`py-2 sm:py-2.5 rounded text-xs font-bold border uppercase transition-all duration-200 ${
+                        className={`min-h-[44px] py-2.5 rounded text-xs font-bold border uppercase transition-all duration-200 flex items-center justify-center ${
                           calcMonths === m
                             ? 'bg-national-red text-white border-national-red shadow-[0_0_10px_rgba(227,30,36,0.3)] scale-[1.02]'
                             : 'bg-surface-card border-white/10 text-slate-300 hover:border-white/20'
@@ -332,8 +334,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
             {/* Calculator Output */}
             <div className="lg:col-span-6 bg-surface-card p-5 sm:p-6 rounded-xl border border-white/10 flex flex-col justify-between">
               <div className="space-y-3 sm:space-y-4">
-                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-extrabold">
-                  Расчет ежемесячного платежа
+                <div className="text-xs uppercase tracking-wider text-slate-400 font-extrabold">
+                  Расчет поэтапного платежа
                 </div>
                 <div className="space-y-2 text-xs sm:text-sm">
                   <div className="flex justify-between">
@@ -374,27 +376,37 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                 <div className="tech-line my-3" />
 
                 <div className="text-center py-1">
-                  <div className="text-[11px] text-slate-400 mb-1 uppercase tracking-wider">Платеж в месяц (0% переплат):</div>
+                  <div className="text-xs text-slate-400 mb-1 uppercase tracking-wider">Ежемесячный платеж в кассу автошколы:</div>
                   <motion.div
                     key={`${monthlyPayment}-${calcMonths}-${calcCategory}`}
                     initial={{ opacity: 0, scale: 0.9, y: 6 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                    className="font-extrabold text-3xl sm:text-4xl text-white"
+                    transition={{ duration: 0.2 }}
+                    className="font-black text-3xl sm:text-4xl text-white tracking-tight"
                   >
-                    ~ {formatPrice(monthlyPayment)} <span className="text-xs sm:text-sm font-normal text-slate-400">/ мес</span>
+                    {formatPrice(monthlyPayment)}
+                    <span className="text-xs text-slate-400 font-normal"> / месяц</span>
                   </motion.div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Сумма фиксируется в договоре об оказании платных образовательных услуг.
+                  </p>
                 </div>
               </div>
 
-              <button
-                onClick={() =>
-                  onSelectTariff(`${selectedCalcTariff.title} (Рассрочка)`, selectedCalcTariff.price)
-                }
-                className="w-full py-3.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition shadow-lg shadow-national-red/30 mt-4 sm:mt-6 active:scale-[0.98]"
-              >
-                Оформить обучение в рассрочку
-              </button>
+              <div className="pt-5 border-t border-white/10 mt-4">
+                <button
+                  onClick={() =>
+                    onSelectTariff(
+                      `${selectedCalcTariff.title} (Поэтапно: взнос ${formatPrice(initialPayment)})`,
+                      selectedCalcTariff.price
+                    )
+                  }
+                  className="w-full min-h-[44px] py-3.5 rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg shadow-national-red/30 flex items-center justify-center gap-2"
+                >
+                  <span>Оформить поэтапную оплату</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -169,6 +169,6 @@ html.theme-bc * {
   border-color: #063462 !important;
 }
 
-html.hide-images img, html.hide-images svg:not(.keep-icon) {
+html.hide-images img {
   display: none !important;
 }

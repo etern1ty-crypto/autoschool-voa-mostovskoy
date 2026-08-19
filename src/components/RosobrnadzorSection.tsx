@@ -18,20 +18,13 @@ import {
   ChevronDown,
   ChevronUp,
   ExternalLink,
-  Download,
   ShieldCheck,
   MapPin,
-  Clock,
-  Phone,
-  Mail,
   User,
-  CheckCircle2,
-  Lock,
 } from 'lucide-react';
 
 export const RosobrnadzorSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('main');
-  const [selectedDocText, setSelectedDocText] = useState<{ title: string; content: string } | null>(null);
 
   // Exact 14 subsections according to Order No. 1493 (Items 6-20)
   const tabs = [
@@ -53,31 +46,7 @@ export const RosobrnadzorSection: React.FC = () => {
 
   const handleOpenDoc = (doc: RosobrnadzorDoc) => {
     if (doc.url.startsWith('/') || doc.url.startsWith('http')) {
-      window.open(doc.url, '_blank');
-    } else {
-      // Local act viewer
-      let text = '';
-      if (doc.title.includes('распорядка')) {
-        text = `ПРАВИЛА ВНУТРЕННЕГО РАСПОРЯДКА ОБУЧАЮЩИХСЯ\n` +
-          `1. ОБЩИЕ ПОЛОЖЕНИЯ: Настоящие Правила определяют основы статуса обучающихся, их права, обязанности и ответственность в процессе освоения программ профессионального обучения в автошколе ВОА.\n` +
-          `2. РЕЖИМ ЗАНЯТИЙ: Теоретические занятия проводятся по расписанию учебных групп. Практическое вождение — по индивидуальному графику с 07:00 до 21:00.\n` +
-          `3. ПРАВА И ОБЯЗАННОСТИ: Обучающиеся имеют право на получение качественного образования в соответствии с Приказом Минпросвещения РФ № 808. Обучающиеся обязаны соблюдать правила техники безопасности и бережно относиться к имуществу и учебному автопарку.`;
-      } else if (doc.title.includes('самообследования')) {
-        text = `ОТЧЕТ О РЕЗУЛЬТАТАХ САМООБСЛЕДОВАНИЯ\n` +
-          `1. ОБЩИЕ СВЕДЕНИЯ: Организация образовательного процесса соответствует лицензионным требованиям.\n` +
-          `2. УЧЕБНО-МАТЕРИАЛЬНАЯ БАЗА: Собственный закрытый автодром 2 га (20 000 кв. м) по адресу пгт. Мостовской, ул. Кирова, 1Д. Оборудованные учебные классы по ул. Красная, 88.\n` +
-          `3. АВТОПАРК: Учебные автомобили Lada Granta, Datsun on-DO, Lada Kalina, ГАЗ-3309, мотоциклы. Все ТС оснащены дублирующими педалями и видеорегистраторами.\n` +
-          `4. ВЫВОДЫ: Учебно-материальная база и кадровый состав полностью обеспечивают качественную подготовку водителей.`;
-      } else {
-        text = `УЧЕБНЫЕ ПЛАНЫ И ПРОГРАММЫ ПОДГОТОВКИ ВОДИТЕЛЕЙ\n` +
-          `Программы разработаны на основе Примерных программ, утвержденных Приказом Минпросвещения РФ № 808.\n` +
-          `• Категория «В»: 190 часов (Теория: 134 ч., Практика: 56 ч. на МКПП).\n` +
-          `• Категория «А»: 138 часов (Теория: 108 ч., Практика: 18 ч.).\n` +
-          `• Категория «С»: 244 часа (Теория: 168 ч., Практика: 72 ч.).\n` +
-          `• Переподготовка с «В» на «С»: 84 часа (Теория: 44 ч., Практика: 38 ч.).\n` +
-          `• Переподготовка с «С» на «В»: 60 часов (Теория: 24 ч., Практика: 32 ч.).`;
-      }
-      setSelectedDocText({ title: doc.title, content: text });
+      window.open(doc.url, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -91,15 +60,15 @@ export const RosobrnadzorSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-[11px] sm:text-xs font-extrabold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-extrabold uppercase tracking-wider mb-3">
             <ShieldCheck className="w-3.5 h-3.5" />
-            Федеральный закон № 273-ФЗ • Приказ Рособрнадзора № 1493 (ред. 2026)
+            Федеральный закон № 273-ФЗ • Приказ Рособрнадзора № 1493
           </div>
           <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight" itemProp="header">
             Сведения об образовательной организации
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">
-            Официальный раздел раскрытия обязательной информации в соответствии с Федеральным законом от 29.12.2012 № 273-ФЗ «Об образовании в РФ» и Приказом Рособрнадзора от 04.08.2023 № 1493 (в ред. от 03.07.2025 № 1353 / 30.04.2026 № 920).
+            Официальный раздел раскрытия обязательной информации в соответствии с Федеральным законом от 29.12.2012 № 273-ФЗ «Об образовании в РФ» и Приказом Рособрнадзора от 04.08.2023 № 1493.
           </p>
         </div>
 
@@ -107,7 +76,7 @@ export const RosobrnadzorSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           {/* Tabs Sidebar */}
           <div className="lg:col-span-4 space-y-1.5 sm:space-y-2">
-            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-bold px-1 mb-2">
+            <div className="text-xs uppercase tracking-wider text-slate-400 font-bold px-1 mb-2">
               Обязательные подразделы:
             </div>
             {tabs.map((tab) => {
@@ -151,14 +120,14 @@ export const RosobrnadzorSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 gap-3 text-xs text-slate-300">
                   <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                    <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Полное наименование:</div>
+                    <div className="text-xs text-slate-400 uppercase font-bold mb-1">Полное наименование:</div>
                     <div className="font-bold text-white text-sm" itemProp="orgName">
                       {ROSOBRNADZOR_DATA.common.fullName}
                     </div>
                   </div>
 
                   <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                    <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Сокращенное наименование:</div>
+                    <div className="text-xs text-slate-400 uppercase font-bold mb-1">Сокращенное наименование:</div>
                     <div className="font-bold text-white text-sm" itemProp="shortOrgName">
                       {ROSOBRNADZOR_DATA.common.shortName}
                     </div>
@@ -166,12 +135,12 @@ export const RosobrnadzorSection: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Дата создания:</div>
-                      <div className="text-white font-medium">1973 год (ВДОАМ — Всероссийское общество автомобилистов)</div>
-                      <div className="text-[10px] text-slate-400 mt-0.5">Внесено в ЕГРЮЛ: 20 января 2003 г.</div>
+                      <div className="text-xs text-slate-400 uppercase font-bold mb-1">Дата создания:</div>
+                      <div className="text-white font-medium">1973 год (Всероссийское общество автомобилистов)</div>
+                      <div className="text-xs text-slate-400 mt-0.5">Внесено в ЕГРЮЛ: 20 января 2003 г.</div>
                     </div>
                     <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Учредитель:</div>
+                      <div className="text-xs text-slate-400 uppercase font-bold mb-1">Учредитель:</div>
                       <div className="text-white font-medium" itemProp="founder">
                         {ROSOBRNADZOR_DATA.common.founder}
                       </div>
@@ -179,55 +148,60 @@ export const RosobrnadzorSection: React.FC = () => {
                   </div>
 
                   <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                    <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Юридический адрес:</div>
+                    <div className="text-xs text-slate-400 uppercase font-bold mb-1">Юридический адрес:</div>
                     <div className="text-white" itemProp="legalAddress">
                       {ROSOBRNADZOR_DATA.common.legalAddress}
                     </div>
                   </div>
 
                   <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                    <div className="text-[10px] text-national-red uppercase font-bold mb-1">
+                    <div className="text-xs text-national-red uppercase font-bold mb-1">
                       Места осуществления образовательной деятельности (пп. «ж» п. 7):
                     </div>
-                    <div className="space-y-1.5 mt-1 text-slate-200">
+                    <div className="space-y-2 mt-1 text-slate-200">
                       <div className="flex items-start gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-national-red shrink-0 mt-0.5" />
+                        <MapPin className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
                         <div>
-                          <strong>Учебные классы (теория):</strong> {ROSOBRNADZOR_DATA.common.classroomAddress}
+                          <strong>Учебные классы (теоретическая подготовка):</strong> {ROSOBRNADZOR_DATA.common.classroomAddress}
                         </div>
                       </div>
                       <div className="flex items-start gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-national-red shrink-0 mt-0.5" />
+                        <MapPin className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
                         <div>
-                          <strong>Закрытый учебный автодром (практика):</strong> {ROSOBRNADZOR_DATA.common.autodromeAddress}{' '}
-                          <span className="text-national-red font-bold">(Площадь: {ROSOBRNADZOR_DATA.common.autodromeArea})</span>
+                          <strong>Учебная площадка (по реестру лицензий):</strong> {ROSOBRNADZOR_DATA.common.cooperativeAddress}
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <MapPin className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
+                        <div>
+                          <strong>Закрытый учебный автодром ВОА (практика):</strong> {ROSOBRNADZOR_DATA.common.autodromeAddress}
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                    <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Лицензия на образовательную деятельность (пп. «з» п. 7):</div>
+                    <div className="text-xs text-slate-400 uppercase font-bold mb-1">Лицензия на образовательную деятельность:</div>
                     <div className="text-white font-semibold">
                       Реестровая выписка {ROSOBRNADZOR_DATA.common.licenseNumber}
                     </div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">
+                    <div className="text-xs text-slate-400 mt-0.5">
                       Орган, выдавший лицензию: {ROSOBRNADZOR_DATA.common.licenseAuthority} (Статус: {ROSOBRNADZOR_DATA.common.licenseStatus})
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Режим и график работы:</div>
+                      <div className="text-xs text-slate-400 uppercase font-bold mb-1">Режим и график работы:</div>
                       <div className="text-white text-xs space-y-1" itemProp="workTime">
                         <div>{ROSOBRNADZOR_DATA.common.workSchedule}</div>
-                        <div className="text-slate-400 text-[11px]">Вождение: {ROSOBRNADZOR_DATA.common.practiceSchedule}</div>
+                        <div className="text-slate-400 text-xs">Вождение: {ROSOBRNADZOR_DATA.common.practiceSchedule}</div>
                       </div>
                     </div>
 
                     <div className="p-3.5 rounded bg-surface-card border border-white/10 space-y-2">
                       <div>
-                        <div className="text-[10px] text-slate-400 uppercase font-bold mb-0.5">Контакты:</div>
+                        <div className="text-xs text-slate-400 uppercase font-bold mb-0.5">Контакты:</div>
                         <a
                           href={`tel:${ROSOBRNADZOR_DATA.common.phoneClean}`}
                           className="text-national-red font-extrabold text-sm block hover:underline"
@@ -236,7 +210,7 @@ export const RosobrnadzorSection: React.FC = () => {
                           {ROSOBRNADZOR_DATA.common.phone}
                         </a>
                       </div>
-                      <div className="text-[11px] text-slate-300" itemProp="e-mail">
+                      <div className="text-xs text-slate-300" itemProp="e-mail">
                         Email: <strong className="text-white">{ROSOBRNADZOR_DATA.common.email}</strong>
                       </div>
                     </div>
@@ -245,7 +219,7 @@ export const RosobrnadzorSection: React.FC = () => {
                   {/* Legal Requisites Table */}
                   <div className="p-4 rounded bg-surface-card border border-white/10 mt-2">
                     <div className="text-xs text-white font-bold uppercase mb-2">Реквизиты организации:</div>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px]">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                       <div><span className="text-slate-400">ИНН:</span> <strong className="text-white">{ROSOBRNADZOR_DATA.common.legalRequisites.inn}</strong></div>
                       <div><span className="text-slate-400">КПП:</span> <strong className="text-white">{ROSOBRNADZOR_DATA.common.legalRequisites.kpp}</strong></div>
                       <div><span className="text-slate-400">ОГРН:</span> <strong className="text-white">{ROSOBRNADZOR_DATA.common.legalRequisites.ogrn}</strong></div>
@@ -271,7 +245,7 @@ export const RosobrnadzorSection: React.FC = () => {
                 <div className="space-y-3 text-xs text-slate-300">
                   {ROSOBRNADZOR_DATA.structure.governingBodies.map((item, idx) => (
                     <div key={idx} className="p-4 rounded bg-surface-card border border-white/10">
-                      <div className="text-[10px] text-national-red uppercase font-bold mb-0.5">{item.status}</div>
+                      <div className="text-xs text-national-red uppercase font-bold mb-0.5">{item.status}</div>
                       <div className="font-bold text-white text-sm">{item.name}</div>
                       {item.person && (
                         <div className="text-white font-semibold text-xs mt-1">Руководитель: {item.person}</div>
@@ -296,21 +270,15 @@ export const RosobrnadzorSection: React.FC = () => {
                     3. Документы
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Учредительные документы, лицензия, заключения надзорных органов и локальные нормативные акты (п. 9 Требований).
+                    Учредительные документы, лицензия, заключения надзорных органов и локальные нормативные акты.
                   </p>
                 </div>
 
-                {/* Electronic Signature Badge (ГОСТ / Приказ № 1493 п. 6) */}
-                <div className="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-3">
-                  <Lock className="w-5 h-5 text-emerald-400 shrink-0" />
-                  <div className="leading-snug">
-                    <div className="font-bold text-white uppercase text-[11px]">
-                      Документы заверены простой электронной подписью (ЭЦП / УКЭП)
-                    </div>
-                    <div className="text-[10px] text-slate-300">
-                      Сертификат: <code className="text-emerald-400">01F82B9A00E1AEB892408291</code> • Владелец: Круц Павел Викторович (Директор) • Срок: 12.05.2024 – 12.05.2029
-                    </div>
-                  </div>
+                <div className="p-3.5 rounded-lg bg-surface-card border border-white/10 text-xs text-slate-300 space-y-1">
+                  <div className="font-bold text-white uppercase">Официальные документы организации:</div>
+                  <p className="text-slate-400">
+                    Документы утверждены руководителем образовательной организации. Заверенные копии, учебные планы и локальные нормативные акты доступны для ознакомления в учебной части автошколы.
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -323,13 +291,13 @@ export const RosobrnadzorSection: React.FC = () => {
                       <div className="flex items-start gap-2.5">
                         <FileText className="w-4 h-4 text-national-red shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                         <div>
-                          <div className="text-[10px] text-slate-400 uppercase font-bold mb-0.5">{doc.category}</div>
+                          <div className="text-xs text-slate-400 uppercase font-bold mb-0.5">{doc.category}</div>
                           <div className="text-white font-semibold text-xs leading-snug group-hover:text-national-red transition-colors">
                             {doc.title}
                           </div>
                         </div>
                       </div>
-                      <span className="px-2 py-0.5 rounded bg-white/5 text-[10px] font-bold text-slate-300 shrink-0 uppercase border border-white/10 flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded bg-white/5 text-xs font-bold text-slate-300 shrink-0 uppercase border border-white/10 flex items-center gap-1">
                         {doc.fileType}
                         <ExternalLink className="w-3 h-3 text-slate-400" />
                       </span>
@@ -338,7 +306,7 @@ export const RosobrnadzorSection: React.FC = () => {
                 </div>
 
                 <div className="p-3.5 rounded bg-surface-card border border-white/10 text-xs text-slate-300">
-                  <strong>Предписания органов, осуществляющих государственный контроль (надзор) в сфере образования (пп. «ж» п. 9):</strong> Невыполненных предписаний надзорных органов не имеется.
+                  <strong>Предписания органов государственного контроля (надзора):</strong> Невыполненных предписаний надзорных органов не имеется.
                 </div>
               </div>
             )}
@@ -351,7 +319,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     4. Образование
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Сведения о реализуемых программах профессионального обучения, учебных планах, формах и сроках обучения (п. 10 Требований).
+                    Сведения о реализуемых программах профессионального обучения, учебных планах, формах и сроках обучения.
                   </p>
                 </div>
 
@@ -359,8 +327,8 @@ export const RosobrnadzorSection: React.FC = () => {
                   <div><strong>Уровень образования:</strong> Профессиональное обучение / Дополнительное образование</div>
                   <div><strong>Форма обучения:</strong> Очная (в оборудованных учебных аудиториях и на автодроме)</div>
                   <div><strong>Язык образования:</strong> Русский (в соответствии со ст. 14 ФЗ № 273-ФЗ)</div>
-                  <div><strong>Государственная аккредитация:</strong> Для основных программ профессионального обучения государственная аккредитация законодательством РФ не предусмотрена (пп. «д» пп. 1 п. 10).</div>
-                  <div><strong>Численность обучающихся:</strong> Обучение за счет бюджетных средств не ведется (100% по договорам за счет физ./юр. лиц). Иностранных граждан в контингенте нет.</div>
+                  <div><strong>Государственная аккредитация:</strong> Для основных программ профессионального обучения государственная аккредитация законодательством РФ не предусмотрена.</div>
+                  <div><strong>Численность обучающихся:</strong> Обучение за счет бюджетных средств не ведется (100% по договорам за счет физ./юр. лиц).</div>
                 </div>
 
                 <div className="space-y-3">
@@ -376,7 +344,7 @@ export const RosobrnadzorSection: React.FC = () => {
                       </div>
                       <h4 className="font-bold text-white text-sm">{prog.name}</h4>
                       <p className="text-xs text-slate-300 leading-relaxed">{prog.description}</p>
-                      <div className="flex flex-wrap gap-4 text-[11px] text-slate-400 pt-1 border-t border-white/5">
+                      <div className="flex flex-wrap gap-4 text-xs text-slate-400 pt-1 border-t border-white/5">
                         <div>Теория: <strong className="text-white">{prog.theoryHours} ч.</strong></div>
                         <div>Практика: <strong className="text-white">{prog.practiceHours} ч.</strong></div>
                         <div>Форма: <strong className="text-white">{prog.form}</strong></div>
@@ -395,7 +363,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     5. Руководство
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Сведения о руководителе образовательной организации и его заместителях (п. 11 Требований).
+                    Сведения о руководителе образовательной организации и его заместителях.
                   </p>
                 </div>
 
@@ -439,7 +407,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     6. Педагогический состав
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Персональный состав педагогических работников с указанием уровня образования, квалификации и стажа (п. 12 Требований).
+                    Персональный состав педагогических работников с указанием уровня образования, квалификации и стажа.
                   </p>
                 </div>
 
@@ -468,7 +436,7 @@ export const RosobrnadzorSection: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="flex gap-6 pt-2 border-t border-white/5 text-[11px]">
+                      <div className="flex gap-6 pt-2 border-t border-white/5 text-xs">
                         <div>Общий стаж: <strong className="text-white">{member.totalExperience}</strong></div>
                         <div>Педагогический стаж: <strong className="text-white">{member.teachingExperience}</strong></div>
                       </div>
@@ -486,7 +454,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     7. Материально-техническое обеспечение и оснащенность образовательного процесса. Доступная среда
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Сведения о классах, автодроме, транспорте и условиях для лиц с ОВЗ (п. 13 Требований).
+                    Сведения о классах, автодроме, транспорте и условиях для лиц с ОВЗ.
                   </p>
                 </div>
 
@@ -536,7 +504,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     8. Платные образовательные услуги
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Положение об оказании платных услуг, образцы договоров и утвержденный прейскурант от 01.01.2026 г. (п. 14 Требований).
+                    Положение об оказании платных услуг, образцы договоров и утвержденный прейскурант.
                   </p>
                 </div>
 
@@ -548,7 +516,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     >
                       <div>
                         <div className="font-bold text-white text-sm">{t.title}</div>
-                        <div className="text-[11px] text-slate-400">{t.duration} • {t.theoryHours} + {t.practiceHours}</div>
+                        <div className="text-xs text-slate-400">{t.duration} • {t.theoryHours} + {t.practiceHours}</div>
                       </div>
                       <span className="font-extrabold text-national-red text-base">
                         {t.price.toLocaleString('ru-RU')} ₽
@@ -597,7 +565,7 @@ export const RosobrnadzorSection: React.FC = () => {
               </div>
             )}
 
-            {/* 11. Стипендии и меры поддержки (п. 17 с изм. № 920) */}
+            {/* 11. Стипендии и меры поддержки (п. 17) */}
             {activeTab === 'scholarships' && (
               <div className="space-y-5" itemProp="scholarships">
                 <div className="pb-3 border-b border-white/5">
@@ -610,10 +578,10 @@ export const RosobrnadzorSection: React.FC = () => {
                     Выплата стипендий и предоставление мер социальной поддержки обучающимся локальными нормативными актами автошколы не предусмотрены.
                   </p>
                   <p className="text-slate-400">
-                    Общежитие, интернат и жилые помещения для обучающихся не предоставляются. Плата за проживание в общежитии не взимается (в соответствии с Приказом Рособрнадзора № 920).
+                    Общежитие, интернат и жилые помещения для обучающихся не предоставляются. Плата за проживание в общежитии не взимается.
                   </p>
                   <p className="text-white font-semibold">
-                    Автошкола предоставляет внутреннюю беспроцентную рассрочку оплаты обучения 0% на весь период курса.
+                    Автошкола предоставляет внутреннюю поэтапную оплату курса без участия банков.
                   </p>
                 </div>
               </div>
@@ -674,43 +642,6 @@ export const RosobrnadzorSection: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Local Document Text Viewer Modal */}
-      {selectedDocText && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-2xl max-h-[80vh] rounded-2xl bg-[#0c0f0f] border border-white/10 shadow-2xl p-6 sm:p-8 text-white flex flex-col">
-            <div className="pb-4 border-b border-white/10 shrink-0">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider mb-2">
-                <FileText className="w-3.5 h-3.5" />
-                Локальный нормативный акт ОО
-              </div>
-              <h3 className="font-extrabold text-lg sm:text-xl text-white uppercase tracking-tight">
-                {selectedDocText.title}
-              </h3>
-            </div>
-
-            <div className="overflow-y-auto py-4 space-y-3 text-xs text-slate-300 leading-relaxed whitespace-pre-line font-mono bg-black/30 p-4 rounded-lg border border-white/5">
-              {selectedDocText.content}
-            </div>
-
-            {/* Signature Stamp */}
-            <div className="p-3 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] space-y-0.5 shrink-0">
-              <div className="font-bold text-white uppercase">ДОКУМЕНТ ПОДПИСАН ЭЛЕКТРОННОЙ ПОДПИСЬЮ</div>
-              <div>Сертификат: 01F82B9A00E1AEB892408291 • Владелец: Круц Павел Викторович (Директор)</div>
-              <div>Действителен: с 12.05.2024 по 12.05.2029</div>
-            </div>
-
-            <div className="pt-4 border-t border-white/10 flex justify-end shrink-0">
-              <button
-                onClick={() => setSelectedDocText(null)}
-                className="px-6 py-2.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition"
-              >
-                Закрыть
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

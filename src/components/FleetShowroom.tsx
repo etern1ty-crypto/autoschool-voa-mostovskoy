@@ -45,7 +45,7 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
                     <span className="w-2 h-2 rounded-full bg-national-red animate-pulse" />
                     {activeCar.category}
                   </p>
-                  <span className="px-2.5 py-0.5 rounded bg-national-red/20 text-national-red text-[11px] font-extrabold border border-national-red/30">
+                  <span className="px-2.5 py-0.5 rounded bg-national-red/20 text-national-red text-xs font-extrabold border border-national-red/30">
                     {activeCar.transmission}
                   </span>
                 </div>
@@ -58,11 +58,11 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
 
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
-                    <p className="text-slate-400 uppercase text-[10px] mb-0.5">Двигатель</p>
+                    <p className="text-slate-400 uppercase text-xs mb-0.5">Двигатель</p>
                     <p className="text-white font-bold">{activeCar.engine}</p>
                   </div>
                   <div>
-                    <p className="text-slate-400 uppercase text-[10px] mb-0.5">Оснащение</p>
+                    <p className="text-slate-400 uppercase text-xs mb-0.5">Оснащение</p>
                     <p className="text-white font-bold">Дубль-педали</p>
                   </div>
                 </div>
@@ -82,10 +82,10 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
 
                 <button
                   onClick={() => onSelectCar(activeCar.name)}
-                  className="w-full py-3 rounded-sm bg-national-red text-white font-bold text-xs uppercase tracking-wider hover:bg-red-700 transition flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
+                  className="w-full min-h-[44px] py-3.5 rounded-sm bg-national-red text-white font-bold text-xs uppercase tracking-wider hover:bg-red-700 transition flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
                 >
-                  <span>Выбрать для обучения</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Выбрать {activeCar.name} для обучения</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </motion.div>
             </AnimatePresence>
@@ -107,6 +107,7 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
                 key={activeCar.id}
                 src={activeCar.image}
                 alt={activeCar.name}
+                loading="lazy"
                 initial={{ opacity: 0, scale: 0.95, x: 15 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 1.03, x: -15 }}
@@ -124,6 +125,7 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
           <button
             key={car.id}
             onClick={() => setSelectedIdx(idx)}
+            aria-label={`Выбрать автомобиль ${car.name}`}
             className={`tilt-card relative w-28 sm:w-40 h-20 sm:h-24 rounded-lg overflow-hidden shrink-0 group cursor-pointer focus:outline-none transition-all p-1.5 sm:p-2 flex flex-col justify-between snap-center ${
               selectedIdx === idx
                 ? 'border-2 border-national-red shadow-[0_0_15px_rgba(227,30,36,0.4)] bg-surface-card scale-105'
@@ -134,17 +136,18 @@ export const FleetShowroom: React.FC<FleetShowroomProps> = ({ onSelectCar }) => 
               <img
                 src={car.image}
                 alt={car.name}
+                loading="lazy"
                 className="max-h-full max-w-full object-contain"
               />
             </div>
 
             <div className="flex items-center justify-between w-full pt-1 border-t border-white/5">
-              <span className={`text-[10px] sm:text-[11px] uppercase font-bold tracking-wider ${
+              <span className={`text-xs uppercase font-bold tracking-wider ${
                 selectedIdx === idx ? 'text-national-red' : 'text-slate-300'
               }`}>
                 {car.name.split(' ')[0]}
               </span>
-              <span className="text-[9px] sm:text-[10px] text-slate-400 font-semibold uppercase">{car.transmission}</span>
+              <span className="text-xs text-slate-400 font-semibold uppercase">{car.transmission}</span>
             </div>
 
             {selectedIdx === idx && (

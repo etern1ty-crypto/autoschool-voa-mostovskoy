@@ -9,19 +9,19 @@ export const ReviewsSection: React.FC = () => {
   const duplicatedReviews = [...REAL_DROM_REVIEWS, ...REAL_DROM_REVIEWS];
 
   return (
-    <section id="reviews" className="py-20 bg-[#080A0F] relative border-b border-white/5 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 mb-12">
+    <section id="reviews" className="py-12 sm:py-20 bg-[#080A0F] relative border-b border-white/5 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 mb-8 sm:mb-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider mb-3">
             <MessageSquare className="w-3.5 h-3.5" />
-            Проверенные отзывы
+            Впечатления учеников
           </div>
-          <h2 className="font-extrabold text-3xl sm:text-4xl text-white uppercase tracking-tight">
-            Отзывы на Drom.ru
+          <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight">
+            Отзывы наших выпускников
           </h2>
-          <p className="text-sm sm:text-base text-slate-400 mt-2">
-            Реальные впечатления выпускников Мостовского отделения ВОА. Наведите курсор для паузы.
+          <p className="text-xs sm:text-base text-slate-400 mt-2">
+            Реальные истории выпускников автошколы Мостовского отделения ВОА. Наведите курсор для паузы.
           </p>
         </div>
       </div>
@@ -47,13 +47,13 @@ export const ReviewsSection: React.FC = () => {
           {duplicatedReviews.map((rev, idx) => (
             <div
               key={`${rev.id}-${idx}`}
-              className="dashboard-card w-[340px] sm:w-[420px] rounded-xl p-6 flex flex-col justify-between border-white/10 shrink-0 hover:border-national-red/60 transition-all select-none"
+              className="dashboard-card w-[320px] sm:w-[400px] rounded-xl p-5 sm:p-6 flex flex-col justify-between border-white/10 shrink-0 hover:border-national-red/60 transition-all select-none"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface-card border border-white/10 text-[10px] font-bold text-slate-300">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface-card border border-white/10 text-xs font-bold text-slate-300">
                     <CheckCircle className="w-3 h-3 text-national-red" />
-                    <span>{rev.source || 'Drom.ru'} проверен</span>
+                    <span>{rev.source}</span>
                   </div>
 
                   <div className="flex items-center gap-1">
@@ -73,12 +73,12 @@ export const ReviewsSection: React.FC = () => {
               <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs">
                 <div>
                   <h4 className="font-bold text-white uppercase text-xs">{rev.author}</h4>
-                  <div className="text-[10px] text-national-red font-semibold">{rev.category}</div>
+                  <div className="text-xs text-national-red font-semibold">{rev.category}</div>
                   {rev.instructor && (
-                    <div className="text-[10px] text-slate-400 mt-0.5">Инструктор: {rev.instructor}</div>
+                    <div className="text-xs text-slate-400 mt-0.5">Инструктор: {rev.instructor}</div>
                   )}
                 </div>
-                <div className="text-[10px] text-slate-500">{rev.date}</div>
+                <div className="text-xs text-slate-500">{rev.date}</div>
               </div>
             </div>
           ))}

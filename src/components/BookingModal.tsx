@@ -18,7 +18,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState(initialTariff);
-  const [agreed, setAgreed] = useState(true);
+  const [agreed, setAgreed] = useState(false); // 152-FZ: Never pre-checked
+  const [errorMsg, setErrorMsg] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -26,6 +27,22 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setCategory(initialTariff);
     }
   }, [initialTariff]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleResetAndClose();
+      }
+    };
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -40,13 +57,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     if (val.length >= 6) formatted += '-' + val.substring(6, 8);
     if (val.length >= 8) formatted += '-' + val.substring(8, 10);
     setPhone(formatted);
+    setErrorMsg('');
   };
 
   const getWhatsAppLink = () => {
     const text = encodeURIComponent(
-      `Здравствуйте! Хочу записаться на обучение в автошколу ВОА.\n` +
-      `Программа: ${category}\n` +
-      `Имя: ${name || 'Не указано'}\n` +
+      `Здравствуйте! Хочу записаться на обучение в автошколу ВОА Мостовской.\n` +
+      `Выбранный курс/автомобиль: ${category}\n` +
+      `Имя: ${name.trim() || 'Не указано'}\n` +
       `Телефон: ${phone || 'Не указан'}`
     );
     return `https://wa.me/79183278999?text=${text}`;
@@ -55,12 +73,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed) {
-      alert('Пожалуйста, подтвердите согласие на обработку персональных данных (152-ФЗ)');
+      setErrorMsg('Пожалуйста, подтвердите согласие на обработку персональных данных (152-ФЗ)');
       return;
     }
+    if (phone.length < 16) {
+      setErrorMsg('Пожалуйста, введите корректный номер телефона');
+      return;
+    }
+    setErrorMsg('');
     setSubmitted(true);
     try {
-      window.open(getWhatsAppLink(), '_blank');
+      window.open(getWhatsAppLink(), '_blank', 'noopener,noreferrer');
     } catch (_) {}
   };
 
@@ -68,14 +91,26 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     setSubmitted(false);
     setName('');
     setPhone('');
+    setErrorMsg('');
+    setAgreed(false);
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="booking-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) handleResetAndClose();
+      }}
+    >
       <div className="relative w-full max-w-lg rounded-2xl bg-[#0c0f0f] border border-national-red/40 shadow-2xl p-6 sm:p-8 text-white">
         <button
+          type="button"
           onClick={handleResetAndClose}
+          aria-label="Закрыть окно записи"
           className="absolute top-5 right-5 p-2 rounded bg-surface-card text-slate-400 hover:text-white hover:bg-white/10 transition"
         >
           <X className="w-5 h-5" />
@@ -86,11 +121,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(16,185,129,0.3)]">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h3 className="font-extrabold text-2xl text-white uppercase tracking-tight">
+            <h3 id="booking-modal-title" className="font-extrabold text-2xl text-white uppercase tracking-tight">
               Заявка принята!
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed">
-              Мы свяжемся с вами в течение 10 минут по номеру <strong className="text-national-red">{phone}</strong> для подтверждения записи и фиксации цены.
+              Мы свяжемся с вами в течение рабочего времени по номеру <strong className="text-national-red">{phone}</strong> для подтверждения записи.
             </p>
 
             <div className="pt-2 space-y-2">
@@ -113,6 +148,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </a>
 
               <button
+                type="button"
                 onClick={handleResetAndClose}
                 className="w-full py-2 text-slate-500 hover:text-slate-300 text-xs transition"
               >
@@ -127,49 +163,53 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <Car className="w-3.5 h-3.5" />
                 Запись в автошколу ВОА
               </div>
-              <h3 className="font-extrabold text-2xl text-white uppercase tracking-tight">
+              <h3 id="booking-modal-title" className="font-extrabold text-2xl text-white uppercase tracking-tight">
                 Записаться на обучение
               </h3>
               <p className="text-xs text-slate-400 mt-1">
-                Зафиксируйте официальную цену и получите подробную консультацию.
+                Оставьте контактные данные для консультации и записи в ближайшую группу.
               </p>
             </div>
 
             <div className="tech-line" />
 
+            {/* Error banner */}
+            {errorMsg && (
+              <div className="p-3 rounded bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-medium">
+                {errorMsg}
+              </div>
+            )}
+
             {/* Category Select */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
-                Программа:
+              <label htmlFor="booking-category" className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
+                Программа или автомобиль:
               </label>
-              <select
+              <input
+                id="booking-category"
+                type="text"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full px-4 py-3 rounded bg-surface-card border border-white/10 text-white text-sm focus:outline-none focus:border-national-red"
-              >
-                <option value="Категория «В»">Категория «В» (Легковые, МКПП)</option>
-                <option value="Категория «А»">Категория «А» (Мотоциклы)</option>
-                <option value="Категория «С»">Категория «С» (Грузовые ГАЗ)</option>
-                <option value="Комбо «А» + «В»">Комбо «А» + «В»</option>
-                <option value="Переподготовка с В на С">Переподготовка с «В» на «С»</option>
-                <option value="Переподготовка с С на В">Переподготовка с «С» на «В»</option>
-                <option value="20-ти часовая программа ПДД">20-ти часовая программа ПДД</option>
-                <option value="Дополнительные часы вождения">Дополнительные часы вождения</option>
-              </select>
+              />
             </div>
 
             {/* Name */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
+              <label htmlFor="booking-name" className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
                 Ваше имя:
               </label>
               <div className="relative">
                 <input
+                  id="booking-name"
                   type="text"
                   required
                   placeholder="Иван Иванов"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    setErrorMsg('');
+                  }}
                   className="w-full pl-10 pr-4 py-3 rounded bg-surface-card border border-white/10 text-white text-sm focus:outline-none focus:border-national-red"
                 />
                 <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
@@ -178,11 +218,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             {/* Phone */}
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
+              <label htmlFor="booking-phone" className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
                 Номер телефона:
               </label>
               <div className="relative">
                 <input
+                  id="booking-phone"
                   type="tel"
                   required
                   placeholder="+7 (918) 000-00-00"
@@ -194,17 +235,20 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </div>
             </div>
 
-            {/* 152-FZ */}
+            {/* 152-FZ Consent */}
             <div className="pt-1">
               <label className="flex items-start gap-2.5 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={agreed}
-                  onChange={(e) => setAgreed(e.target.checked)}
+                  onChange={(e) => {
+                    setAgreed(e.target.checked);
+                    if (e.target.checked) setErrorMsg('');
+                  }}
                   className="w-4 h-4 mt-0.5 rounded border-white/20 bg-surface-card text-national-red accent-national-red"
                 />
-                <span className="text-[10px] text-slate-400 leading-tight">
-                  Согласен на обработку персональных данных в соответствии с{' '}
+                <span className="text-xs text-slate-300 leading-tight">
+                  Я даю согласие на обработку моих персональных данных в соответствии с{' '}
                   <button
                     type="button"
                     onClick={(e) => {
@@ -213,7 +257,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     }}
                     className="text-national-red underline hover:text-white transition"
                   >
-                    Политикой конфиденциальности (ФЗ-152)
+                    Политикой конфиденциальности (152-ФЗ)
                   </button>
                   .
                 </span>

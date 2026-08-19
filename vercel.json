@@ -21,11 +21,11 @@
         },
         {
           "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
+          "value": "max-age=31536000; includeSubDomains"
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://api-maps.yandex.ru https://yandex.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.maps.yandex.net https://api-maps.yandex.ru https://yastatic.net https://*.yandex.ru https://*.yandex.net; connect-src 'self' https://api-maps.yandex.ru https://*.maps.yandex.net https://*.yandex.ru https://*.yandex.net; frame-src 'self' https://api-maps.yandex.ru https://yandex.ru https://*.yandex.ru;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://api-maps.yandex.ru https://yandex.ru https://yastatic.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.maps.yandex.net https://api-maps.yandex.ru https://yastatic.net https://*.yandex.ru https://*.yandex.net; connect-src 'self' https://api-maps.yandex.ru https://*.maps.yandex.net https://*.yandex.ru https://*.yandex.net; frame-src 'self' https://api-maps.yandex.ru https://yandex.ru https://*.yandex.ru; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'self';"
         }
       ]
     }
