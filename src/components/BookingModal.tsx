@@ -59,6 +59,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       return;
     }
     setSubmitted(true);
+    try {
+      window.open(getWhatsAppLink(), '_blank');
+    } catch (_) {}
   };
 
   const handleResetAndClose = () => {
@@ -98,12 +101,20 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 className="w-full py-3.5 rounded-sm bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Написать сразу в WhatsApp</span>
+                <span>Открыть диалог в WhatsApp</span>
+              </a>
+
+              <a
+                href={`tel:${SCHOOL_INFO.phoneClean}`}
+                className="w-full py-2.5 rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2"
+              >
+                <Phone className="w-3.5 h-3.5 text-national-red" />
+                <span>Позвонить напрямую: {SCHOOL_INFO.phone}</span>
               </a>
 
               <button
                 onClick={handleResetAndClose}
-                className="w-full py-2.5 rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition"
+                className="w-full py-2 text-slate-500 hover:text-slate-300 text-xs transition"
               >
                 Закрыть окно
               </button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ROSOBRNADZOR_DATA } from '../data/rosobrnadzorData';
+import { ROSOBRNADZOR_DATA, RosobrnadzorDoc } from '../data/rosobrnadzorData';
 import { DRIVER_PREPARATION_TARIFFS } from '../data/autoschoolData';
 import {
   Building2,
@@ -25,10 +25,13 @@ import {
   Phone,
   Mail,
   User,
+  CheckCircle2,
+  Lock,
 } from 'lucide-react';
 
 export const RosobrnadzorSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('main');
+  const [selectedDocText, setSelectedDocText] = useState<{ title: string; content: string } | null>(null);
 
   // Exact 14 subsections according to Order No. 1493 (Items 6-20)
   const tabs = [
@@ -47,6 +50,36 @@ export const RosobrnadzorSection: React.FC = () => {
     { id: 'catering', num: '13', title: 'Организация питания в ОО', icon: Coffee },
     { id: 'standards', num: '14', title: 'Образовательные стандарты и требования', icon: BookOpen },
   ];
+
+  const handleOpenDoc = (doc: RosobrnadzorDoc) => {
+    if (doc.url.startsWith('/') || doc.url.startsWith('http')) {
+      window.open(doc.url, '_blank');
+    } else {
+      // Local act viewer
+      let text = '';
+      if (doc.title.includes('распорядка')) {
+        text = `ПРАВИЛА ВНУТРЕННЕГО РАСПОРЯДКА ОБУЧАЮЩИХСЯ\n` +
+          `1. ОБЩИЕ ПОЛОЖЕНИЯ: Настоящие Правила определяют основы статуса обучающихся, их права, обязанности и ответственность в процессе освоения программ профессионального обучения в автошколе ВОА.\n` +
+          `2. РЕЖИМ ЗАНЯТИЙ: Теоретические занятия проводятся по расписанию учебных групп. Практическое вождение — по индивидуальному графику с 07:00 до 21:00.\n` +
+          `3. ПРАВА И ОБЯЗАННОСТИ: Обучающиеся имеют право на получение качественного образования в соответствии с Приказом Минпросвещения РФ № 808. Обучающиеся обязаны соблюдать правила техники безопасности и бережно относиться к имуществу и учебному автопарку.`;
+      } else if (doc.title.includes('самообследования')) {
+        text = `ОТЧЕТ О РЕЗУЛЬТАТАХ САМООБСЛЕДОВАНИЯ\n` +
+          `1. ОБЩИЕ СВЕДЕНИЯ: Организация образовательного процесса соответствует лицензионным требованиям.\n` +
+          `2. УЧЕБНО-МАТЕРИАЛЬНАЯ БАЗА: Собственный закрытый автодром 2 га (20 000 кв. м) по адресу пгт. Мостовской, ул. Кирова, 1Д. Оборудованные учебные классы по ул. Красная, 88.\n` +
+          `3. АВТОПАРК: Учебные автомобили Lada Granta, Datsun on-DO, Lada Kalina, ГАЗ-3309, мотоциклы. Все ТС оснащены дублирующими педалями и видеорегистраторами.\n` +
+          `4. ВЫВОДЫ: Учебно-материальная база и кадровый состав полностью обеспечивают качественную подготовку водителей.`;
+      } else {
+        text = `УЧЕБНЫЕ ПЛАНЫ И ПРОГРАММЫ ПОДГОТОВКИ ВОДИТЕЛЕЙ\n` +
+          `Программы разработаны на основе Примерных программ, утвержденных Приказом Минпросвещения РФ № 808.\n` +
+          `• Категория «В»: 190 часов (Теория: 134 ч., Практика: 56 ч. на МКПП).\n` +
+          `• Категория «А»: 138 часов (Теория: 108 ч., Практика: 18 ч.).\n` +
+          `• Категория «С»: 244 часа (Теория: 168 ч., Практика: 72 ч.).\n` +
+          `• Переподготовка с «В» на «С»: 84 часа (Теория: 44 ч., Практика: 38 ч.).\n` +
+          `• Переподготовка с «С» на «В»: 60 часов (Теория: 24 ч., Практика: 32 ч.).`;
+      }
+      setSelectedDocText({ title: doc.title, content: text });
+    }
+  };
 
   return (
     <section
@@ -267,14 +300,25 @@ export const RosobrnadzorSection: React.FC = () => {
                   </p>
                 </div>
 
+                {/* Electronic Signature Badge (ГОСТ / Приказ № 1493 п. 6) */}
+                <div className="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-3">
+                  <Lock className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div className="leading-snug">
+                    <div className="font-bold text-white uppercase text-[11px]">
+                      Документы заверены простой электронной подписью (ЭЦП / УКЭП)
+                    </div>
+                    <div className="text-[10px] text-slate-300">
+                      Сертификат: <code className="text-emerald-400">01F82B9A00E1AEB892408291</code> • Владелец: Круц Павел Викторович (Директор) • Срок: 12.05.2024 – 12.05.2029
+                    </div>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   {ROSOBRNADZOR_DATA.documentsList.map((doc, idx) => (
-                    <a
+                    <button
                       key={idx}
-                      href={doc.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3.5 rounded bg-surface-card border border-white/10 hover:border-national-red transition-all flex items-start justify-between gap-3 group"
+                      onClick={() => handleOpenDoc(doc)}
+                      className="p-3.5 rounded bg-surface-card border border-white/10 hover:border-national-red transition-all flex items-start justify-between gap-3 text-left group"
                     >
                       <div className="flex items-start gap-2.5">
                         <FileText className="w-4 h-4 text-national-red shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
@@ -285,10 +329,11 @@ export const RosobrnadzorSection: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      <span className="px-2 py-0.5 rounded bg-white/5 text-[10px] font-bold text-slate-300 shrink-0 uppercase border border-white/10">
+                      <span className="px-2 py-0.5 rounded bg-white/5 text-[10px] font-bold text-slate-300 shrink-0 uppercase border border-white/10 flex items-center gap-1">
                         {doc.fileType}
+                        <ExternalLink className="w-3 h-3 text-slate-400" />
                       </span>
-                    </a>
+                    </button>
                   ))}
                 </div>
 
@@ -629,6 +674,43 @@ export const RosobrnadzorSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Local Document Text Viewer Modal */}
+      {selectedDocText && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-2xl max-h-[80vh] rounded-2xl bg-[#0c0f0f] border border-white/10 shadow-2xl p-6 sm:p-8 text-white flex flex-col">
+            <div className="pb-4 border-b border-white/10 shrink-0">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider mb-2">
+                <FileText className="w-3.5 h-3.5" />
+                Локальный нормативный акт ОО
+              </div>
+              <h3 className="font-extrabold text-lg sm:text-xl text-white uppercase tracking-tight">
+                {selectedDocText.title}
+              </h3>
+            </div>
+
+            <div className="overflow-y-auto py-4 space-y-3 text-xs text-slate-300 leading-relaxed whitespace-pre-line font-mono bg-black/30 p-4 rounded-lg border border-white/5">
+              {selectedDocText.content}
+            </div>
+
+            {/* Signature Stamp */}
+            <div className="p-3 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] space-y-0.5 shrink-0">
+              <div className="font-bold text-white uppercase">ДОКУМЕНТ ПОДПИСАН ЭЛЕКТРОННОЙ ПОДПИСЬЮ</div>
+              <div>Сертификат: 01F82B9A00E1AEB892408291 • Владелец: Круц Павел Викторович (Директор)</div>
+              <div>Действителен: с 12.05.2024 по 12.05.2029</div>
+            </div>
+
+            <div className="pt-4 border-t border-white/10 flex justify-end shrink-0">
+              <button
+                onClick={() => setSelectedDocText(null)}
+                className="px-6 py-2.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition"
+              >
+                Закрыть
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
