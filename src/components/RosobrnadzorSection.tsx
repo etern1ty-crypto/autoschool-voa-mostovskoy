@@ -7,43 +7,45 @@ import {
   FileText,
   GraduationCap,
   UserCheck,
+  Award,
   Wrench,
   DollarSign,
   CreditCard,
   UserPlus,
-  Eye,
   Globe,
   Coffee,
-  Award,
+  BookOpen,
   ChevronDown,
   ChevronUp,
   ExternalLink,
   Download,
   ShieldCheck,
-  CheckCircle2,
-  Phone,
-  Mail,
   MapPin,
   Clock,
+  Phone,
+  Mail,
+  User,
 } from 'lucide-react';
 
 export const RosobrnadzorSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('main');
 
+  // Exact 14 subsections according to Order No. 1493 (Items 6-20)
   const tabs = [
     { id: 'main', num: '1', title: 'Основные сведения', icon: Building2 },
     { id: 'struct', num: '2', title: 'Структура и органы управления', icon: Users },
-    { id: 'docs', num: '3', title: 'Документы и лицензии', icon: FileText },
-    { id: 'education', num: '4', title: 'Образование и программы', icon: GraduationCap },
-    { id: 'staff', num: '5', title: 'Руководство и педагоги', icon: UserCheck },
-    { id: 'facilities', num: '6', title: 'Материально-техническая база', icon: Wrench },
-    { id: 'services', num: '7', title: 'Платные образовательные услуги', icon: DollarSign },
-    { id: 'finance', num: '8', title: 'Финансово-хозяйственная деятельность', icon: CreditCard },
-    { id: 'vacancies', num: '9', title: 'Вакантные места для приема', icon: UserPlus },
-    { id: 'accessibility', num: '10', title: 'Доступная среда', icon: Eye },
-    { id: 'international', num: '11', title: 'Международное сотрудничество', icon: Globe },
-    { id: 'catering', num: '12', title: 'Организация питания и охрана здоровья', icon: Coffee },
-    { id: 'scholarships', num: '13', title: 'Стипендии и меры поддержки', icon: Award },
+    { id: 'docs', num: '3', title: 'Документы', icon: FileText },
+    { id: 'education', num: '4', title: 'Образование', icon: GraduationCap },
+    { id: 'leadership', num: '5', title: 'Руководство', icon: UserCheck },
+    { id: 'ped_staff', num: '6', title: 'Педагогический состав', icon: User },
+    { id: 'facilities', num: '7', title: 'МТО и доступная среда', icon: Wrench },
+    { id: 'paid_services', num: '8', title: 'Платные образовательные услуги', icon: DollarSign },
+    { id: 'finance', num: '9', title: 'Финансово-хозяйственная деятельность', icon: CreditCard },
+    { id: 'vacancies', num: '10', title: 'Вакантные места для приема (перевода)', icon: UserPlus },
+    { id: 'scholarships', num: '11', title: 'Стипендии и меры поддержки', icon: Award },
+    { id: 'international', num: '12', title: 'Международное сотрудничество', icon: Globe },
+    { id: 'catering', num: '13', title: 'Организация питания в ОО', icon: Coffee },
+    { id: 'standards', num: '14', title: 'Образовательные стандарты и требования', icon: BookOpen },
   ];
 
   return (
@@ -64,16 +66,16 @@ export const RosobrnadzorSection: React.FC = () => {
             Сведения об образовательной организации
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">
-            Официальный раздел раскрытия обязательной информации в соответствии с законодательством Российской Федерации в сфере образования.
+            Официальный раздел раскрытия обязательной информации в соответствии с Федеральным законом от 29.12.2012 № 273-ФЗ «Об образовании в РФ» и Приказом Рособрнадзора от 04.08.2023 № 1493 (в ред. от 03.07.2025 № 1353 / 30.04.2026 № 920).
           </p>
         </div>
 
-        {/* 13-Tab Navigation & Content Grid */}
+        {/* 14-Tab Navigation & Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           {/* Tabs Sidebar */}
           <div className="lg:col-span-4 space-y-1.5 sm:space-y-2">
             <div className="text-[11px] uppercase tracking-wider text-slate-400 font-bold px-1 mb-2">
-              Обязательные разделы:
+              Обязательные подразделы:
             </div>
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -102,7 +104,7 @@ export const RosobrnadzorSection: React.FC = () => {
 
           {/* Tab Content Panel */}
           <div className="lg:col-span-8 dashboard-card rounded-xl p-5 sm:p-8 border-white/10">
-            {/* 1. Основные сведения */}
+            {/* 1. Основные сведения (п. 7) */}
             {activeTab === 'main' && (
               <div className="space-y-5" itemProp="commonInfo">
                 <div className="pb-3 border-b border-white/5">
@@ -110,7 +112,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     1. Основные сведения
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Общая информация о наименовании, учредителе, адресах и реквизитах организации.
+                    Сведения о наименовании, дате создания, учредителе, адресах, режиме работы, лицензии и реквизитах.
                   </p>
                 </div>
 
@@ -131,7 +133,7 @@ export const RosobrnadzorSection: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="p-3.5 rounded bg-surface-card border border-white/10">
-                      <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Дата создания организации:</div>
+                      <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Дата создания:</div>
                       <div className="text-white font-medium">1973 год (ВДОАМ — Всероссийское общество автомобилистов)</div>
                       <div className="text-[10px] text-slate-400 mt-0.5">Внесено в ЕГРЮЛ: 20 января 2003 г.</div>
                     </div>
@@ -152,7 +154,7 @@ export const RosobrnadzorSection: React.FC = () => {
 
                   <div className="p-3.5 rounded bg-surface-card border border-white/10">
                     <div className="text-[10px] text-national-red uppercase font-bold mb-1">
-                      Места осуществления образовательной деятельности:
+                      Места осуществления образовательной деятельности (пп. «ж» п. 7):
                     </div>
                     <div className="space-y-1.5 mt-1 text-slate-200">
                       <div className="flex items-start gap-2">
@@ -168,6 +170,16 @@ export const RosobrnadzorSection: React.FC = () => {
                           <span className="text-national-red font-bold">(Площадь: {ROSOBRNADZOR_DATA.common.autodromeArea})</span>
                         </div>
                       </div>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded bg-surface-card border border-white/10">
+                    <div className="text-[10px] text-slate-400 uppercase font-bold mb-1">Лицензия на образовательную деятельность (пп. «з» п. 7):</div>
+                    <div className="text-white font-semibold">
+                      Реестровая выписка {ROSOBRNADZOR_DATA.common.licenseNumber}
+                    </div>
+                    <div className="text-[11px] text-slate-400 mt-0.5">
+                      Орган, выдавший лицензию: {ROSOBRNADZOR_DATA.common.licenseAuthority} (Статус: {ROSOBRNADZOR_DATA.common.licenseStatus})
                     </div>
                   </div>
 
@@ -211,7 +223,7 @@ export const RosobrnadzorSection: React.FC = () => {
               </div>
             )}
 
-            {/* 2. Структура и органы управления */}
+            {/* 2. Структура и органы управления (п. 8) */}
             {activeTab === 'struct' && (
               <div className="space-y-5" itemProp="structOrgUprav">
                 <div className="pb-3 border-b border-white/5">
@@ -219,7 +231,7 @@ export const RosobrnadzorSection: React.FC = () => {
                     2. Структура и органы управления образовательной организацией
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Органы управления действуют в соответствии с законодательством РФ и Уставом ВОА.
+                    Сведения об органах управления и руководителе образовательного подразделения.
                   </p>
                 </div>
 
@@ -236,19 +248,22 @@ export const RosobrnadzorSection: React.FC = () => {
                       )}
                     </div>
                   ))}
+                  <div className="p-3 rounded bg-surface-card border border-white/10 text-slate-400 text-xs">
+                    Филиалы и представительства у образовательной организации отсутствуют.
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* 3. Документы */}
+            {/* 3. Документы (п. 9) */}
             {activeTab === 'docs' && (
               <div className="space-y-5" itemProp="docFiles">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    3. Документы и лицензии
+                    3. Документы
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Учредительные, лицензионные и локальные нормативные акты организации.
+                    Учредительные документы, лицензия, заключения надзорных органов и локальные нормативные акты (п. 9 Требований).
                   </p>
                 </div>
 
@@ -276,25 +291,31 @@ export const RosobrnadzorSection: React.FC = () => {
                     </a>
                   ))}
                 </div>
+
+                <div className="p-3.5 rounded bg-surface-card border border-white/10 text-xs text-slate-300">
+                  <strong>Предписания органов, осуществляющих государственный контроль (надзор) в сфере образования (пп. «ж» п. 9):</strong> Невыполненных предписаний надзорных органов не имеется.
+                </div>
               </div>
             )}
 
-            {/* 4. Образование */}
+            {/* 4. Образование (п. 10) */}
             {activeTab === 'education' && (
               <div className="space-y-5" itemProp="education">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    4. Образование и реализуемые программы
+                    4. Образование
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Информация об уровне образования, формах и нормативных сроках обучения.
+                    Сведения о реализуемых программах профессионального обучения, учебных планах, формах и сроках обучения (п. 10 Требований).
                   </p>
                 </div>
 
                 <div className="p-3.5 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-1">
                   <div><strong>Уровень образования:</strong> Профессиональное обучение / Дополнительное образование</div>
-                  <div><strong>Форма обучения:</strong> Очная (в учебных аудиториях и на автодроме)</div>
-                  <div><strong>Язык образования:</strong> Русский</div>
+                  <div><strong>Форма обучения:</strong> Очная (в оборудованных учебных аудиториях и на автодроме)</div>
+                  <div><strong>Язык образования:</strong> Русский (в соответствии со ст. 14 ФЗ № 273-ФЗ)</div>
+                  <div><strong>Государственная аккредитация:</strong> Для основных программ профессионального обучения государственная аккредитация законодательством РФ не предусмотрена (пп. «д» пп. 1 п. 10).</div>
+                  <div><strong>Численность обучающихся:</strong> Обучение за счет бюджетных средств не ведется (100% по договорам за счет физ./юр. лиц). Иностранных граждан в контингенте нет.</div>
                 </div>
 
                 <div className="space-y-3">
@@ -321,15 +342,59 @@ export const RosobrnadzorSection: React.FC = () => {
               </div>
             )}
 
-            {/* 5. Руководство и педагогический состав */}
-            {activeTab === 'staff' && (
+            {/* 5. Руководство (п. 11) */}
+            {activeTab === 'leadership' && (
+              <div className="space-y-5" itemProp="leadership">
+                <div className="pb-3 border-b border-white/5">
+                  <h3 className="font-extrabold text-xl text-white uppercase">
+                    5. Руководство
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Сведения о руководителе образовательной организации и его заместителях (п. 11 Требований).
+                  </p>
+                </div>
+
+                <div className="space-y-3 text-xs">
+                  <div className="p-4 rounded bg-surface-card border border-white/10 space-y-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h4 className="font-extrabold text-white text-base">Круц Павел Викторович</h4>
+                      <span className="px-2.5 py-0.5 rounded bg-national-red/20 text-national-red font-bold text-xs">
+                        Директор автошколы
+                      </span>
+                    </div>
+                    <div className="space-y-1 text-slate-300">
+                      <div><span className="text-slate-400">Должность:</span> Руководитель образовательного подразделения / Директор</div>
+                      <div><span className="text-slate-400">Контактный телефон:</span> <a href={`tel:${ROSOBRNADZOR_DATA.common.phoneClean}`} className="text-white hover:text-national-red font-bold">{ROSOBRNADZOR_DATA.common.phone}</a></div>
+                      <div><span className="text-slate-400">Электронная почта:</span> <a href={`mailto:${ROSOBRNADZOR_DATA.common.email}`} className="text-white hover:text-national-red font-bold">{ROSOBRNADZOR_DATA.common.email}</a></div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded bg-surface-card border border-white/10 space-y-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h4 className="font-extrabold text-white text-base">Кудинов Владислав Викторович</h4>
+                      <span className="px-2.5 py-0.5 rounded bg-white/10 text-slate-300 font-bold text-xs">
+                        Председатель отделения ВОА
+                      </span>
+                    </div>
+                    <div className="space-y-1 text-slate-300">
+                      <div><span className="text-slate-400">Должность:</span> Председатель Мостовского РО КРО ООО «ВОА»</div>
+                      <div><span className="text-slate-400">Контактный телефон:</span> {ROSOBRNADZOR_DATA.common.phone}</div>
+                      <div><span className="text-slate-400">Электронная почта:</span> {ROSOBRNADZOR_DATA.common.email}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 6. Педагогический состав (п. 12) */}
+            {activeTab === 'ped_staff' && (
               <div className="space-y-5" itemProp="pedStaff">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    5. Руководство и педагогический состав
+                    6. Педагогический состав
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Сведения о квалификации, образовании и опыте работы преподавателей и инструкторов.
+                    Персональный состав педагогических работников с указанием уровня образования, квалификации и стажа (п. 12 Требований).
                   </p>
                 </div>
 
@@ -346,7 +411,7 @@ export const RosobrnadzorSection: React.FC = () => {
                           <span className="text-slate-400">Образование:</span> <strong>{member.education}</strong>
                         </div>
                         <div>
-                          <span className="text-slate-400">Квалификация:</span> {member.qualification}
+                          <span className="text-slate-400">Квалификация и переподготовка:</span> {member.qualification}
                         </div>
                         <div>
                           <span className="text-slate-400">Преподаваемые дисциплины:</span>
@@ -368,15 +433,15 @@ export const RosobrnadzorSection: React.FC = () => {
               </div>
             )}
 
-            {/* 6. Материально-техническое обеспечение */}
+            {/* 7. МТО и доступная среда (п. 13) */}
             {activeTab === 'facilities' && (
               <div className="space-y-5" itemProp="materEnvir">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    6. Материально-техническое обеспечение и оснащенность
+                    7. Материально-техническое обеспечение и оснащенность образовательного процесса. Доступная среда
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Сведения об аудиториях, автодроме, учебных ТС и средствах обучения.
+                    Сведения о классах, автодроме, транспорте и условиях для лиц с ОВЗ (п. 13 Требований).
                   </p>
                 </div>
 
@@ -387,39 +452,46 @@ export const RosobrnadzorSection: React.FC = () => {
                       Адрес: <strong className="text-white">пгт. Мостовской, ул. Красная, д. 88</strong>.
                     </p>
                     <p className="text-slate-400">
-                      Оснащение: мультимедийные проекторы, электрифицированные стенды по ПДД РФ, учебные тренажеры первой помощи «Максим», наглядные макеты узлов, деталей и механизмов ТС, специализированные рабочие места для решения билетов.
+                      Оснащение: мультимедийные проекторы, электрифицированные стенды по ПДД РФ, учебные тренажеры первой помощи «Максим», наглядные макеты узлов, деталей и механизмов ТС, автоматизированные места для сдачи тестов.
                     </p>
                   </div>
 
                   <div className="p-4 rounded bg-surface-card border border-white/10 space-y-1.5">
-                    <div className="font-bold text-white text-sm">2. Закрытый учебный автодром:</div>
+                    <div className="font-bold text-white text-sm">2. Закрытый учебный автодром (объект практических занятий):</div>
                     <p className="text-slate-300">
                       Адрес: <strong className="text-white">пгт. Мостовской, ул. Кирова, д. 1Д</strong>.
                     </p>
                     <p className="text-slate-400">
-                      Площадь: <strong className="text-national-red font-bold">2 га (20 000 кв. м)</strong>. Асфальтобетонное покрытие, глухое ограждение по периметру, эстакада с наклонным участком (продольный уклон по ГОСТ), освещение для вечерних занятий, комплект переносных дорожных знаков и стоек для отработки упражнений.
+                      Площадь: <strong className="text-national-red font-bold">2 га (20 000 кв. м)</strong>. Асфальтобетонное покрытие, ограждение по периметру, наклонный участок (эстакада) по ГОСТ, освещение, учебные переносные дорожные знаки и разметка.
                     </p>
                   </div>
 
                   <div className="p-4 rounded bg-surface-card border border-white/10 space-y-1.5">
                     <div className="font-bold text-white text-sm">3. Учебный транспортный парк:</div>
                     <p className="text-slate-400">
-                      Легковые автомобили Lada Granta FL (2023 г.), Datsun on-DO (2022 г.), Lada Kalina (2021 г.), грузовой автомобиль ГАЗ-3309 (2020 г., без гидроусилителя), учебные мотоциклы. Все ТС оснащены сертифицированными дублирующими педалями и комплексами видеорегистрации ГИБДД.
+                      Lada Granta FL (2023 г.), Datsun on-DO (2022 г.), Lada Kalina (2021 г.), грузовой автомобиль ГАЗ-3309 (2020 г., без гидроусилителя), учебные мотоциклы. Все ТС оснащены сертифицированными дублирующими педалями и системами видеорегистрации ГИБДД.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded bg-surface-card border border-white/10 space-y-1.5">
+                    <div className="font-bold text-white text-sm">4. Условия доступности для инвалидов и лиц с ОВЗ:</div>
+                    <p className="text-slate-400">
+                      Официальный сайт адаптирован для лиц с нарушениями зрения (ГОСТ Р 52872). Доступ в учебные помещения первого этажа обеспечен безбарьерной средой. Обучение лиц с ОВЗ осуществляется при наличии медицинского допуска к управлению ТС.
                     </p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* 7. Платные образовательные услуги */}
-            {activeTab === 'services' && (
+            {/* 8. Платные образовательные услуги (п. 14) */}
+            {activeTab === 'paid_services' && (
               <div className="space-y-5" itemProp="paidEduServices">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    7. Платные образовательные услуги
+                    8. Платные образовательные услуги
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">
-                    Положение об оказании платных услуг и утвержденный прейскурант от 01.01.2026 г.
+                    Положение об оказании платных услуг, образцы договоров и утвержденный прейскурант от 01.01.2026 г. (п. 14 Требований).
                   </p>
                 </div>
 
@@ -442,17 +514,17 @@ export const RosobrnadzorSection: React.FC = () => {
               </div>
             )}
 
-            {/* 8. Финансово-хозяйственная деятельность */}
+            {/* 9. Финансово-хозяйственная деятельность (п. 15) */}
             {activeTab === 'finance' && (
               <div className="space-y-5" itemProp="finances">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    8. Финансово-хозяйственная деятельность
+                    9. Финансово-хозяйственная деятельность
                   </h3>
                 </div>
                 <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-2">
                   <p>
-                    Финансовое обеспечение образовательной деятельности осуществляется исключительно по договорам об образовании за счет средств физических и (или) юридических лиц.
+                    Финансовое обеспечение образовательной деятельности осуществляется исключительно по договорам об оказании платных образовательных услуг за счет средств физических и (или) юридических лиц.
                   </p>
                   <p className="text-slate-400">
                     Бюджетные ассигнования федерального бюджета, бюджетов субъектов РФ и местных бюджетов не выделяются.
@@ -461,12 +533,12 @@ export const RosobrnadzorSection: React.FC = () => {
               </div>
             )}
 
-            {/* 9. Вакантные места для приема */}
+            {/* 10. Вакантные места для приема (п. 16) */}
             {activeTab === 'vacancies' && (
               <div className="space-y-5" itemProp="vacantSpots">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    9. Вакантные места для приема (перевода) обучающихся
+                    10. Вакантные места для приема (перевода) обучающихся
                   </h3>
                 </div>
                 <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-2">
@@ -480,73 +552,77 @@ export const RosobrnadzorSection: React.FC = () => {
               </div>
             )}
 
-            {/* 10. Доступная среда */}
-            {activeTab === 'accessibility' && (
-              <div className="space-y-5" itemProp="accessibleEnvironment">
-                <div className="pb-3 border-b border-white/5">
-                  <h3 className="font-extrabold text-xl text-white uppercase">
-                    10. Доступная среда
-                  </h3>
-                </div>
-                <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-2">
-                  <p>
-                    Официальный сайт автошколы адаптирован для лиц с нарушениями зрения в соответствии с ГОСТ Р 52872-2012 «Интернет-ресурсы. Требования доступности для инвалидов по зрению». Кнопка переключения расположена в верхней панели сайта.
-                  </p>
-                  <p className="text-slate-400">
-                    Обучение лиц с ограниченными возможностями здоровья осуществляется при наличии соответствующего медицинского заключения об отсутствии противопоказаний к управлению ТС.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* 11. Международное сотрудничество */}
-            {activeTab === 'international' && (
-              <div className="space-y-5" itemProp="internationalCoop">
-                <div className="pb-3 border-b border-white/5">
-                  <h3 className="font-extrabold text-xl text-white uppercase">
-                    11. Международное сотрудничество
-                  </h3>
-                </div>
-                <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300">
-                  Заключенных и планируемых к заключению договоров с иностранными и (или) международными организациями по вопросам образования и науки организация не имеет.
-                </div>
-              </div>
-            )}
-
-            {/* 12. Организация питания и охрана здоровья */}
-            {activeTab === 'catering' && (
-              <div className="space-y-5" itemProp="cateringAndHealth">
-                <div className="pb-3 border-b border-white/5">
-                  <h3 className="font-extrabold text-xl text-white uppercase">
-                    12. Организация питания и охрана здоровья обучающихся
-                  </h3>
-                </div>
-                <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-2">
-                  <p>
-                    В соответствии с расписанием занятий (не более 4 академических часов в день) организация горячего питания не предусмотрена. В учебных классах организован питьевой режим (бутилированная вода).
-                  </p>
-                  <p className="text-slate-400">
-                    Охрана здоровья обучающихся включает соблюдение санитарно-гигиенических норм, регулярное проветривание аудиторий, наличие аптечек первой помощи и инструктаж по технике безопасности.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* 13. Стипендии и меры поддержки */}
+            {/* 11. Стипендии и меры поддержки (п. 17 с изм. № 920) */}
             {activeTab === 'scholarships' && (
               <div className="space-y-5" itemProp="scholarships">
                 <div className="pb-3 border-b border-white/5">
                   <h3 className="font-extrabold text-xl text-white uppercase">
-                    13. Стипендии и меры поддержки обучающихся
+                    11. Стипендии и меры поддержки обучающихся
                   </h3>
                 </div>
                 <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-2">
                   <p>
-                    Выплата стипендий и предоставление общежития, интерната или иных мер социальной поддержки обучающимся локальными нормативными актами автошколы не предусмотрены.
+                    Выплата стипендий и предоставление мер социальной поддержки обучающимся локальными нормативными актами автошколы не предусмотрены.
                   </p>
                   <p className="text-slate-400">
+                    Общежитие, интернат и жилые помещения для обучающихся не предоставляются. Плата за проживание в общежитии не взимается (в соответствии с Приказом Рособрнадзора № 920).
+                  </p>
+                  <p className="text-white font-semibold">
                     Автошкола предоставляет внутреннюю беспроцентную рассрочку оплаты обучения 0% на весь период курса.
                   </p>
+                </div>
+              </div>
+            )}
+
+            {/* 12. Международное сотрудничество (п. 18) */}
+            {activeTab === 'international' && (
+              <div className="space-y-5" itemProp="internationalCoop">
+                <div className="pb-3 border-b border-white/5">
+                  <h3 className="font-extrabold text-xl text-white uppercase">
+                    12. Международное сотрудничество
+                  </h3>
+                </div>
+                <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300">
+                  Заключенных и планируемых к заключению договоров с иностранными и (или) международными организациями по вопросам образования и науки образовательная организация не имеет.
+                </div>
+              </div>
+            )}
+
+            {/* 13. Организация питания в ОО (п. 19) */}
+            {activeTab === 'catering' && (
+              <div className="space-y-5" itemProp="cateringAndHealth">
+                <div className="pb-3 border-b border-white/5">
+                  <h3 className="font-extrabold text-xl text-white uppercase">
+                    13. Организация питания в образовательной организации
+                  </h3>
+                </div>
+                <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-2">
+                  <p>
+                    В соответствии с расписанием учебных занятий (не более 4 академических часов в день) организация горячего питания не предусмотрена. В учебных классах организован постоянный питьевой режим (бутилированная вода).
+                  </p>
+                  <p className="text-slate-400">
+                    Охрана здоровья обучающихся включает соблюдение санитарно-гигиенических норм, регулярное проветривание аудиторий, наличие укомплектованных аптечек первой помощи и вводный инструктаж по охране труда и пожарной безопасности.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* 14. Образовательные стандарты и требования (п. 20) */}
+            {activeTab === 'standards' && (
+              <div className="space-y-5" itemProp="eduStandards">
+                <div className="pb-3 border-b border-white/5">
+                  <h3 className="font-extrabold text-xl text-white uppercase">
+                    14. Образовательные стандарты и требования
+                  </h3>
+                </div>
+                <div className="p-4 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-3">
+                  <p>
+                    Подготовка водителей транспортных средств осуществляется в соответствии с Примерными программами профессионального обучения водителей транспортных средств соответствующих категорий и подкатегорий, утвержденными Министерством просвещения Российской Федерации (Приказ Минпросвещения России от 08.11.2021 № 808).
+                  </p>
+                  <div className="p-3 rounded bg-surface-card border border-white/10 text-slate-300 space-y-1">
+                    <div><strong>Нормативная база:</strong> Приказ Минпросвещения РФ от 08.11.2021 № 808</div>
+                    <div><strong>Согласование:</strong> Учебно-материальная база согласована с УГИБДД ГУ МВД России по Краснодарскому краю (Заключение № 23-418).</div>
+                  </div>
                 </div>
               </div>
             )}
