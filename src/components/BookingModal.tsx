@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, ArrowRight, Car, Phone, User, Mail, MapPin } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { X, Car, Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { SCHOOL_INFO } from '../data/autoschoolData';
 
 interface BookingModalProps {
@@ -15,23 +15,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   initialTariff = 'Категория «В»',
   onOpenPrivacyPolicy,
 }) => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [category, setCategory] = useState(initialTariff);
-  const [agreed, setAgreed] = useState(false); // 152-FZ: Never pre-checked
-  const [errorMsg, setErrorMsg] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (initialTariff) {
-      setCategory(initialTariff);
-    }
-  }, [initialTariff]);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        handleResetAndClose();
+        onClose();
       }
     };
     if (isOpen) {
@@ -42,46 +29,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       document.body.style.overflow = 'unset';
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value.replace(/\D/g, '');
-    if (val.startsWith('7') || val.startsWith('8')) {
-      val = val.substring(1);
-    }
-    let formatted = '+7';
-    if (val.length > 0) formatted += ' (' + val.substring(0, 3);
-    if (val.length >= 3) formatted += ') ' + val.substring(3, 6);
-    if (val.length >= 6) formatted += '-' + val.substring(6, 8);
-    if (val.length >= 8) formatted += '-' + val.substring(8, 10);
-    setPhone(formatted);
-    setErrorMsg('');
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!agreed) {
-      setErrorMsg('Пожалуйста, подтвердите согласие на обработку персональных данных (152-ФЗ)');
-      return;
-    }
-    if (phone.length < 16) {
-      setErrorMsg('Пожалуйста, введите корректный номер телефона');
-      return;
-    }
-    setErrorMsg('');
-    setSubmitted(true);
-  };
-
-  const handleResetAndClose = () => {
-    setSubmitted(false);
-    setName('');
-    setPhone('');
-    setErrorMsg('');
-    setAgreed(false);
-    onClose();
-  };
 
   return (
     <div
@@ -90,185 +40,111 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       aria-labelledby="booking-modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
       onClick={(e) => {
-        if (e.target === e.currentTarget) handleResetAndClose();
+        if (e.target === e.currentTarget) onClose();
       }}
     >
       <div className="relative w-full max-w-lg rounded-2xl bg-[#0c0f0f] border border-national-red/40 shadow-2xl p-6 sm:p-8 text-white">
         <button
           type="button"
-          onClick={handleResetAndClose}
+          onClick={onClose}
           aria-label="Закрыть окно записи"
-          className="absolute top-5 right-5 p-2 rounded bg-surface-card text-slate-400 hover:text-white hover:bg-white/10 transition min-w-[36px] min-h-[36px] flex items-center justify-center"
+          className="absolute top-5 right-5 p-2 rounded bg-surface-card text-slate-400 hover:text-white hover:bg-white/10 transition min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {submitted ? (
-          <div className="text-center py-6 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-              <CheckCircle2 className="w-10 h-10" />
+        <div className="space-y-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider mb-2">
+              <Car className="w-3.5 h-3.5" />
+              Запись и консультации
             </div>
-            <h3 id="booking-modal-title" className="font-extrabold text-2xl text-white uppercase tracking-tight">
-              Заявка принята!
+            <h3 id="booking-modal-title" className="font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight">
+              Связь с учебной частью
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto leading-relaxed">
-              Мы свяжемся с вами в течение рабочего дня по номеру <strong className="text-national-red">{phone}</strong> для консультации по курсу <strong>{category}</strong>.
+            <p className="text-xs text-slate-300 mt-1">
+              Выбранная программа: <strong className="text-white">{initialTariff}</strong>
             </p>
+          </div>
 
-            <div className="p-3.5 rounded bg-surface-card border border-white/10 text-xs text-slate-300 space-y-1.5 text-left">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-national-red shrink-0" />
-                <span>Учебная часть: {SCHOOL_INFO.primaryAddress}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-national-red shrink-0" />
-                <span>Телефон: {SCHOOL_INFO.phone}</span>
+          <div className="tech-line" />
+
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Для записи в учебную группу и заключения договора свяжитесь с учебной частью по телефону или посетите офис автошколы:
+          </p>
+
+          <div className="space-y-2.5 text-xs text-slate-300">
+            <div className="p-3.5 rounded bg-surface-card border border-white/10 flex items-start gap-3">
+              <Phone className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
+              <div>
+                <div className="text-slate-400 font-bold uppercase text-xs">Телефон учебной части:</div>
+                <a href={`tel:${SCHOOL_INFO.phoneClean}`} className="text-white font-bold text-base hover:text-national-red transition">
+                  {SCHOOL_INFO.phone}
+                </a>
+                <div className="text-slate-400 text-xs mt-0.5">Стационарный: {SCHOOL_INFO.phoneLandline}</div>
               </div>
             </div>
 
-            <div className="pt-2 space-y-2">
-              <a
-                href={`tel:${SCHOOL_INFO.phoneClean}`}
-                className="w-full min-h-[44px] rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Позвонить в учебную часть: {SCHOOL_INFO.phone}</span>
-              </a>
+            <div className="p-3.5 rounded bg-surface-card border border-white/10 flex items-start gap-3">
+              <Mail className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
+              <div>
+                <div className="text-slate-400 font-bold uppercase text-xs">Электронная почта:</div>
+                <a href={`mailto:${SCHOOL_INFO.email}`} className="text-white font-bold text-sm hover:text-national-red transition">
+                  {SCHOOL_INFO.email}
+                </a>
+              </div>
+            </div>
 
-              <a
-                href={`mailto:${SCHOOL_INFO.email}?subject=${encodeURIComponent(`Заявка на обучение: ${category}`)}&body=${encodeURIComponent(`Имя: ${name}\nТелефон: ${phone}\nПрограмма: ${category}`)}`}
-                className="w-full min-h-[44px] rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2"
-              >
-                <Mail className="w-4 h-4 text-national-red" />
-                <span>Написать на email: {SCHOOL_INFO.email}</span>
-              </a>
+            <div className="p-3.5 rounded bg-surface-card border border-white/10 flex items-start gap-3">
+              <MapPin className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
+              <div>
+                <div className="text-slate-400 font-bold uppercase text-xs">Адрес учебного класса и приёма документов:</div>
+                <div className="text-white font-semibold text-xs mt-0.5">{SCHOOL_INFO.primaryAddress}</div>
+              </div>
+            </div>
 
-              <button
-                type="button"
-                onClick={handleResetAndClose}
-                className="w-full py-2 text-slate-500 hover:text-slate-300 text-xs transition"
-              >
-                Закрыть окно
-              </button>
+            <div className="p-3.5 rounded bg-surface-card border border-white/10 flex items-start gap-3">
+              <Clock className="w-4 h-4 text-national-red shrink-0 mt-0.5" />
+              <div>
+                <div className="text-slate-400 font-bold uppercase text-xs">График работы:</div>
+                <div className="text-white text-xs mt-0.5">{SCHOOL_INFO.workHours}</div>
+              </div>
             </div>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider mb-2">
-                <Car className="w-3.5 h-3.5" />
-                Запись в автошколу ВОА
-              </div>
-              <h3 id="booking-modal-title" className="font-extrabold text-2xl text-white uppercase tracking-tight">
-                Записаться на обучение
-              </h3>
-              <p className="text-xs text-slate-400 mt-1">
-                Оставьте контактные данные для консультации и записи в ближайшую группу.
-              </p>
-            </div>
 
-            <div className="tech-line" />
-
-            {/* Error banner */}
-            {errorMsg && (
-              <div className="p-3 rounded bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-medium">
-                {errorMsg}
-              </div>
-            )}
-
-            {/* Category Select */}
-            <div>
-              <label htmlFor="booking-category" className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
-                Программа или автомобиль:
-              </label>
-              <input
-                id="booking-category"
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-3 rounded bg-surface-card border border-white/10 text-white text-sm focus:outline-none focus:border-national-red"
-              />
-            </div>
-
-            {/* Name */}
-            <div>
-              <label htmlFor="booking-name" className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
-                Ваше имя:
-              </label>
-              <div className="relative">
-                <input
-                  id="booking-name"
-                  type="text"
-                  required
-                  placeholder="Иван Иванов"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    setErrorMsg('');
-                  }}
-                  className="w-full pl-10 pr-4 py-3 rounded bg-surface-card border border-white/10 text-white text-sm focus:outline-none focus:border-national-red"
-                />
-                <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label htmlFor="booking-phone" className="block text-xs font-bold text-slate-300 mb-1 uppercase tracking-wider">
-                Номер телефона:
-              </label>
-              <div className="relative">
-                <input
-                  id="booking-phone"
-                  type="tel"
-                  required
-                  placeholder="+7 (918) 000-00-00"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  className="w-full pl-10 pr-4 py-3 rounded bg-surface-card border border-white/10 text-white text-sm focus:outline-none focus:border-national-red"
-                />
-                <Phone className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
-              </div>
-            </div>
-
-            {/* 152-FZ Consent */}
-            <div className="pt-1">
-              <label className="flex items-start gap-2.5 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={agreed}
-                  onChange={(e) => {
-                    setAgreed(e.target.checked);
-                    if (e.target.checked) setErrorMsg('');
-                  }}
-                  className="w-4 h-4 mt-0.5 rounded border-white/20 bg-surface-card text-national-red accent-national-red"
-                />
-                <span className="text-xs text-slate-300 leading-tight">
-                  Я даю согласие на обработку моих персональных данных в соответствии с{' '}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (onOpenPrivacyPolicy) onOpenPrivacyPolicy();
-                    }}
-                    className="text-national-red underline hover:text-white transition"
-                  >
-                    Политикой конфиденциальности (152-ФЗ)
-                  </button>
-                  .
-                </span>
-              </label>
-            </div>
+          <div className="pt-2 flex flex-col sm:flex-row gap-2">
+            <a
+              href={`tel:${SCHOOL_INFO.phoneClean}`}
+              className="flex-1 min-h-[44px] rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
+            >
+              <Phone className="w-4 h-4" />
+              <span>Позвонить прямо сейчас</span>
+            </a>
 
             <button
-              type="submit"
-              className="w-full min-h-[44px] py-4 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition shadow-lg shadow-national-red/30 flex items-center justify-center gap-2 mt-2"
+              type="button"
+              onClick={onClose}
+              className="min-h-[44px] px-5 rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition cursor-pointer"
             >
-              <span>Отправить заявку</span>
-              <ArrowRight className="w-4 h-4" />
+              Закрыть
             </button>
-          </form>
-        )}
+          </div>
+
+          {onOpenPrivacyPolicy && (
+            <div className="pt-2 text-center text-xs text-slate-500">
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenPrivacyPolicy();
+                }}
+                className="hover:underline hover:text-slate-300 cursor-pointer"
+              >
+                Политика обработки персональных данных (152-ФЗ)
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

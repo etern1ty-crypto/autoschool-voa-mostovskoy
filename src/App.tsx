@@ -7,7 +7,7 @@ import { FleetShowroom } from './components/FleetShowroom';
 import { PricingSection } from './components/PricingSection';
 import { AutodromeSection } from './components/AutodromeSection';
 import { ClassroomSection } from './components/ClassroomSection';
-import { ReviewsSection } from './components/ReviewsSection';
+import { AdmissionSection } from './components/AdmissionSection';
 import { ContactsSection } from './components/ContactsSection';
 import { RosobrnadzorSection } from './components/RosobrnadzorSection';
 import { BookingModal } from './components/BookingModal';
@@ -26,16 +26,6 @@ export const App: React.FC = () => {
     setBookingOpen(true);
   };
 
-  const handleScrollToFleet = () => {
-    const el = document.getElementById('fleet');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleScrollToPricing = () => {
-    const el = document.getElementById('pricing');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const handleNavigateRosobrnadzor = () => {
     const el = document.getElementById('rosobrnadzor');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -44,7 +34,7 @@ export const App: React.FC = () => {
   return (
     <AccessibilityProvider>
       <div className="min-h-screen bg-[#080A0F] text-[#dfe2ee] flex flex-col selection:bg-national-red selection:text-white">
-        {/* Sticky Header & Accessibility Bar Container (Zero Conflict) */}
+        {/* Sticky Header & Accessibility Bar Container */}
         <div className="sticky top-0 z-50 w-full shadow-lg">
           {/* Top Accessibility Bar for Visually Impaired (ГОСТ Р 52872-2012) */}
           <AccessibilityBar />
@@ -58,34 +48,36 @@ export const App: React.FC = () => {
 
         {/* Main Content */}
         <main className="flex-grow">
-          {/* 1. Hero Slideshow with Kinetic Red Gradient Divider */}
+          {/* 1. Hero Section */}
           <HeroSection
             onOpenBooking={() => handleOpenBooking()}
             onNavigateRosobrnadzor={handleNavigateRosobrnadzor}
           />
 
-          {/* 2. Fleet Showroom: Center Stage with Dashboard Cards and 3D Tilt Selector */}
+          {/* 2. Fleet Showroom */}
           <FleetShowroom
             onSelectCar={(carName) => handleOpenBooking(`Автомобиль: ${carName}`)}
           />
 
-          {/* 3. Official Prices & Tariffs */}
+          {/* 3. Official Prices & Programs */}
           <PricingSection
             onSelectTariff={(tariffName) => handleOpenBooking(tariffName)}
           />
 
           {/* 4. Autodrome & Real-layout Training Ground */}
           <AutodromeSection
-            onOpenBooking={() => handleOpenBooking('Пробное занятие на автодроме')}
+            onOpenBooking={() => handleOpenBooking('Занятие на учебной площадке')}
           />
 
           {/* 5. Real Classroom & Educational Base */}
           <ClassroomSection />
 
-          {/* 6. Verified Reviews (Infinite Marquee) */}
-          <ReviewsSection />
+          {/* 6. Admission Requirements & Process */}
+          <AdmissionSection
+            onOpenBooking={() => handleOpenBooking('Консультация по поступлению')}
+          />
 
-          {/* 7. Contacts, Office, Map & Messengers */}
+          {/* 7. Contacts, Office & Sandboxed Map */}
           <ContactsSection
             onOpenBooking={() => handleOpenBooking('Консультация')}
           />
@@ -101,7 +93,7 @@ export const App: React.FC = () => {
           onOpenPrivacyPolicy={() => setPrivacyPolicyOpen(true)}
         />
 
-        {/* Booking Modal */}
+        {/* Booking / Contact Modal */}
         <BookingModal
           isOpen={bookingOpen}
           onClose={() => setBookingOpen(false)}

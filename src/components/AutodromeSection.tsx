@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Navigation, Maximize2 } from 'lucide-react';
+import { ArrowRight, Navigation, MapPin } from 'lucide-react';
 import { SCHOOL_INFO } from '../data/autoschoolData';
 
 interface AutodromeSectionProps {
@@ -23,12 +23,12 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
             <div className="rounded-xl overflow-hidden border border-white/10 bg-surface-card shadow-2xl relative group">
               <img
                 src="/images/slider/autodrome.jpg"
-                alt="Учебный автодром автошколы ВОА Мостовской"
+                alt="Учебная площадка автошколы ВОА Мостовской"
                 className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
               <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 text-xs font-extrabold text-white flex items-center gap-1.5">
-                <Maximize2 className="w-3.5 h-3.5 text-national-red" />
+                <MapPin className="w-3.5 h-3.5 text-national-red" />
                 <span>Учебная площадка ВОА</span>
               </div>
             </div>
@@ -38,17 +38,17 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
           <div className="lg:col-span-6 space-y-4 sm:space-y-5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-card border border-national-red/30 text-national-red text-xs font-bold uppercase tracking-wider">
               <Navigation className="w-3.5 h-3.5" />
-              Экзаменационная площадка ВОА
+              Практическое вождение
             </div>
 
             <h2 className="font-extrabold text-2xl sm:text-4xl text-white uppercase tracking-tight">
-              Собственный закрытый автодром
+              Закрытая учебная площадка
             </h2>
 
             <div className="tech-line" />
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Практические занятия проходят на собственной закрытой асфальтированной учебной площадке ВОА по адресу: <strong className="text-white">{SCHOOL_INFO.autodromeAddress}</strong>. Просторная территория, точная разметка по стандартам ГИБДД, освещение, эстакада и учебные знаки гарантируют уверенную подготовку без очередей.
+              Практические занятия проходят на собственной закрытой асфальтированной учебной площадке ВОА по адресу: <strong className="text-white">{SCHOOL_INFO.autodromeAddress}</strong>. Разметка упражнений, освещение, эстакада и учебные дорожные знаки для отработки всех элементов квалификационного экзамена.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">
@@ -68,9 +68,9 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
             <div className="pt-2">
               <button
                 onClick={onOpenBooking}
-                className="w-full sm:w-auto min-h-[44px] bg-national-red text-white px-6 py-3.5 rounded-sm font-extrabold uppercase tracking-wider text-xs hover:bg-red-700 transition flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
+                className="w-full sm:w-auto min-h-[44px] bg-national-red text-white px-6 py-3.5 rounded-sm font-extrabold uppercase tracking-wider text-xs hover:bg-red-700 transition flex items-center justify-center gap-2 shadow-lg shadow-national-red/30 cursor-pointer"
               >
-                <span>Записаться на автодром</span>
+                <span>Узнать порядок записи</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>

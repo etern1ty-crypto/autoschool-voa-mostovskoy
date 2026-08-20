@@ -42,7 +42,7 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
           type="button"
           onClick={onClose}
           aria-label="Закрыть политику конфиденциальности"
-          className="absolute top-5 right-5 p-2 rounded bg-surface-card text-slate-400 hover:text-white hover:bg-white/10 transition"
+          className="absolute top-5 right-5 p-2 rounded bg-surface-card text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -54,10 +54,10 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
             Федеральный закон № 152-ФЗ «О персональных данных»
           </div>
           <h3 id="privacy-policy-title" className="font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight">
-            Политика конфиденциальности
+            Политика в отношении обработки персональных данных
           </h3>
           <p className="text-xs text-slate-400 mt-1">
-            Положение об обработке и защите персональных данных пользователей сайта.
+            Оператор: {SCHOOL_INFO.name} (рег. № в реестре Роскомнадзора: 12-0244092).
           </p>
         </div>
 
@@ -66,51 +66,40 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
           <div>
             <h4 className="font-bold text-white uppercase text-xs mb-1">1. Общие положения</h4>
             <p>
-              Настоящая Политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые {SCHOOL_INFO.name} (далее — Оператор).
+              Настоящая Политика составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки и защиты персональных данных, осуществляемый {SCHOOL_INFO.name} (далее — Оператор).
             </p>
           </div>
 
           <div>
-            <h4 className="font-bold text-white uppercase text-xs mb-1">2. Состав обрабатываемых данных</h4>
+            <h4 className="font-bold text-white uppercase text-xs mb-1">2. Порядок обработки персональных данных</h4>
             <p>
-              Оператор может обрабатывать следующие данные, добровольно предоставляемые Пользователем при заполнении форм записи и обратной связи:
-            </p>
-            <ul className="list-disc list-inside mt-1 space-y-0.5 text-slate-200">
-              <li>Фамилия, имя (или псевдоним);</li>
-              <li>Номер контактного телефона;</li>
-              <li>Выбранная учебная программа / категория транспортного средства.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-white uppercase text-xs mb-1">3. Цели обработки персональных данных</h4>
-            <p>
-              Персональные данные обрабатываются исключительно в целях:
-            </p>
-            <ul className="list-disc list-inside mt-1 space-y-0.5 text-slate-200">
-              <li>Предоставления консультаций по вопросам обучения и записи в учебные группы автошколы;</li>
-              <li>Подготовки и заключения договора об оказании платных образовательных услуг;</li>
-              <li>Организации учебного процесса и сдачи квалификационных экзаменов в ГИБДД.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-white uppercase text-xs mb-1">4. Порядок сбора, хранения и защиты</h4>
-            <p>
-              Безопасность персональных данных обеспечивается реализацией правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований законодательства РФ в области защиты информации.
+              Официальный сайт носит информационно-справочный характер и не производит сбор, хранение или автоматизированную передачу персональных данных пользователей по сети Интернет.
             </p>
             <p className="mt-1">
-              Обработка данных осуществляется на территории Российской Федерации. Передача сведений третьим лицам осуществляется исключительно в случаях, прямо предусмотренных законодательством РФ (внесение сведений в ФИС ФРДО и реестры Госавтоинспекции МВД РФ).
+              Обработка персональных данных осуществляется исключительно в неавтоматизированном виде при личном обращении гражданина в учебную часть автошколы и заключении письменного договора об оказании платных образовательных услуг.
             </p>
           </div>
 
           <div>
-            <h4 className="font-bold text-white uppercase text-xs mb-1">5. Отзыв согласия и контакты Оператора</h4>
+            <h4 className="font-bold text-white uppercase text-xs mb-1">3. Цели обработки</h4>
             <p>
-              Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору письменное заявление либо уведомление по электронной почте: <strong className="text-white">{SCHOOL_INFO.email}</strong>.
+              Персональные данные субъектов обрабатываются исключительно в целях:
             </p>
-            <div className="mt-2 p-3 rounded bg-surface-card border border-white/10 text-slate-400">
-              Адрес оператора: {SCHOOL_INFO.primaryAddress}
+            <ul className="list-disc list-inside mt-1 space-y-0.5 text-slate-200">
+              <li>Заключения и исполнения договора об оказании платных образовательных услуг;</li>
+              <li>Организации учебного процесса профессионального обучения водителей ТС;</li>
+              <li>Выдачи свидетельств о профессии водителя и передачи сведений в государственные информационные системы (ФИС ФРДО, ГИБДД МВД РФ) в порядке, установленном законодательством РФ.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-white uppercase text-xs mb-1">4. Реквизиты и контакты Оператора</h4>
+            <div className="p-3 rounded bg-surface-card border border-white/10 text-slate-300 space-y-1 mt-1">
+              <div><strong>Оператор:</strong> {SCHOOL_INFO.fullName}</div>
+              <div><strong>Юридический адрес:</strong> {SCHOOL_INFO.legalAddress}</div>
+              <div><strong>Учебная часть:</strong> {SCHOOL_INFO.primaryAddress}</div>
+              <div><strong>Телефон:</strong> {SCHOOL_INFO.phone} / {SCHOOL_INFO.phoneLandline}</div>
+              <div><strong>Email:</strong> {SCHOOL_INFO.email}</div>
             </div>
           </div>
         </div>
@@ -120,9 +109,9 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
           <button
             type="button"
             onClick={onClose}
-            className="min-h-[40px] px-6 py-2.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition"
+            className="min-h-[40px] px-6 py-2.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition cursor-pointer"
           >
-            Понятно
+            Закрыть
           </button>
         </div>
       </div>

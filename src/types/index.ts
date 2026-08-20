@@ -1,11 +1,10 @@
-export type CategoryId = 'A' | 'B' | 'C' | 'AB';
+export type CategoryId = 'A' | 'B' | 'C';
 
 export interface TariffItem {
   id: string;
   title: string;
   category: string;
   price: number;
-  originalPrice?: number;
   duration: string;
   theoryHours: string;
   practiceHours: string;
@@ -43,16 +42,4 @@ export interface Vehicle {
   engine: string;
   description: string;
   features: string[];
-}
-
-export interface Review {
-  id: string;
-  author: string;
-  category: string;
-  date: string;
-  rating: number;
-  source: string;
-  sourceUrl?: string;
-  text: string;
-  instructor?: string;
 }

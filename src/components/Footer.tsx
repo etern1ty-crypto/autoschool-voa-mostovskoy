@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({
               </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              {SCHOOL_INFO.name}. Обучение водителей категорий А, В, С, переподготовка и восстановление навыков в Мостовском районе.
+              {SCHOOL_INFO.fullName}. Подготовка водителей категорий А, В, С и переподготовка в Мостовском районе.
             </p>
             <div className="text-xs text-slate-500">
               {SCHOOL_INFO.license}
@@ -39,37 +39,39 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Nav */}
           <div>
-            <h4 className="font-extrabold text-white text-xs uppercase mb-3 tracking-wider">Обучение и цены</h4>
+            <h4 className="font-extrabold text-white text-xs uppercase mb-3 tracking-wider">Программы обучения</h4>
             <ul className="space-y-2 text-xs">
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «В» (Легковые авто) — 70 000 ₽</a></li>
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «А» (Мотоциклы) — 25 000 ₽</a></li>
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «С» (Грузовые ГАЗ) — 75 000 ₽</a></li>
-              <li><a href="#pricing" className="hover:text-national-red transition">Комбо «А» + «В» — 90 000 ₽</a></li>
-              <li><a href="#pricing" className="hover:text-national-red transition">Переподготовка (от 720 ₽)</a></li>
+              <li><a href="#pricing" className="hover:text-national-red transition">Переподготовка с «В» на «С» — 49 000 ₽</a></li>
+              <li><a href="#pricing" className="hover:text-national-red transition">Переподготовка с «С» на «В» — 38 000 ₽</a></li>
+              <li><a href="#pricing" className="hover:text-national-red transition">Переподготовка с «С» на «D» — 45 000 ₽</a></li>
             </ul>
           </div>
 
-          {/* Rosobrnadzor */}
+          {/* Official Section */}
           <div>
             <h4 className="font-extrabold text-white text-xs uppercase mb-3 tracking-wider">Официальный раздел</h4>
             <ul className="space-y-2 text-xs">
               <li>
                 <button
                   onClick={onNavigateRosobrnadzor}
-                  className="text-left text-national-red hover:underline font-bold"
+                  className="text-left text-national-red hover:underline font-bold cursor-pointer"
                 >
-                  Сведения об образовательной организации (273-ФЗ)
+                  Сведения об образовательной организации
                 </button>
               </li>
-              <li><a href="#autodrome" className="hover:text-white transition">Учебный автодром</a></li>
+              <li><a href="#autodrome" className="hover:text-white transition">Учебная площадка</a></li>
               <li><a href="#fleet" className="hover:text-white transition">Учебный автопарк</a></li>
               <li><a href="#classroom" className="hover:text-white transition">Учебные классы</a></li>
+              <li><a href="#admission" className="hover:text-white transition">Порядок поступления</a></li>
               <li>
                 <button
                   onClick={onOpenPrivacyPolicy}
-                  className="text-left text-slate-400 hover:text-white transition underline decoration-dotted"
+                  className="text-left text-slate-400 hover:text-white transition underline decoration-dotted cursor-pointer"
                 >
-                  Политика конфиденциальности (152-ФЗ)
+                  Политика обработки персональных данных (152-ФЗ)
                 </button>
               </li>
             </ul>
@@ -88,20 +90,23 @@ export const Footer: React.FC<FooterProps> = ({
                 {SCHOOL_INFO.phone}
               </a>
             </div>
+            <div className="text-xs text-slate-400">
+              Стационарный: {SCHOOL_INFO.phoneLandline}
+            </div>
             <div className="pt-2">
               <button
                 onClick={onOpenBooking}
-                className="w-full min-h-[40px] py-2.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition flex items-center justify-center"
+                className="w-full min-h-[40px] py-2.5 rounded-sm bg-national-red text-white font-extrabold text-xs uppercase tracking-wider hover:bg-red-700 transition flex items-center justify-center cursor-pointer"
               >
-                Записаться в группу
+                Связаться с учебной частью
               </button>
             </div>
           </div>
         </div>
 
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-          <div>© {new Date().getFullYear()} Мостовское районное отделение ВОА. Все права защищены.</div>
-          <div>Официальный сайт образовательной организации ВОА</div>
+          <div>© {new Date().getFullYear()} {SCHOOL_INFO.shortName}. Все права защищены.</div>
+          <div>Официальный сайт образовательного подразделения ВОА</div>
         </div>
       </div>
     </footer>
