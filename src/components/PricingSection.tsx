@@ -5,7 +5,7 @@ import {
   RETRAINING_PROGRAMS,
   PRACTICE_SERVICES,
 } from '../data/autoschoolData';
-import { Check, Clock, ArrowRight, Calculator, FileText } from 'lucide-react';
+import { Check, Clock, ArrowRight, Calculator, FileText, AlertCircle } from 'lucide-react';
 
 interface PricingSectionProps {
   onSelectTariff: (tariffName: string, price: number) => void;
@@ -41,8 +41,16 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
             Стоимость обучения
           </h2>
           <p className="text-xs sm:text-base text-slate-400 mt-1.5 sm:mt-2">
-            Стоимость фиксируется в договоре об оказании платных образовательных услуг. Очные занятия в классах, практическое вождение на учебной площадке и возможность поэтапной оплаты.
+            Стоимость образовательных услуг утверждается приказом руководителя и фиксируется в договоре. Оплата теоретического и практического курса, возможность внесения платежей частями.
           </p>
+
+          {/* GSM / Fuel disclosure banner */}
+          <div className="mt-4 p-3 rounded-lg bg-surface-card border border-white/10 text-xs text-slate-300 flex items-center justify-center gap-2 max-w-xl mx-auto text-left">
+            <AlertCircle className="w-4 h-4 text-national-red shrink-0" />
+            <span>
+              Расходы на горюче-смазочные материалы (ГСМ) оплачиваются отдельно в соответствии с условиями договора об оказании образовательных услуг.
+            </span>
+          </div>
 
           {/* Navigation Tabs */}
           <div className="flex items-center justify-center gap-1 sm:gap-2 mt-6 sm:mt-8 p-1 bg-surface-card rounded-lg border border-white/10 max-w-lg mx-auto">
@@ -140,7 +148,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                         : 'bg-surface-card text-white hover:bg-national-red border border-white/10'
                     }`}
                   >
-                    <span>Узнать подробнее</span>
+                    <span>Узнать порядок записи</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -155,7 +163,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto"
             >
               {RETRAINING_PROGRAMS.map((item) => (
                 <div
@@ -188,7 +196,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
                     onClick={() => onSelectTariff(item.title, item.price)}
                     className="w-full min-h-[44px] py-3.5 rounded-sm bg-surface-card text-white hover:bg-national-red font-bold text-xs uppercase tracking-wider border border-white/10 transition flex items-center justify-center cursor-pointer"
                   >
-                    Подать заявку
+                    Узнать порядок записи
                   </button>
                 </div>
               ))}
@@ -333,11 +341,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectTariff }
             <div className="lg:col-span-6 bg-surface-card p-5 sm:p-6 rounded-xl border border-white/10 flex flex-col justify-between">
               <div className="space-y-3 sm:space-y-4">
                 <div className="text-xs uppercase tracking-wider text-slate-400 font-extrabold">
-                  Примерный расчет ежемесячного взноса
+                  Примерный расчет взносов в кассу
                 </div>
                 <div className="space-y-2 text-xs sm:text-sm">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Полная стоимость курса:</span>
+                    <span className="text-slate-400">Стоимость обучения:</span>
                     <motion.span
                       key={selectedCalcTariff.price}
                       initial={{ opacity: 0, y: -5 }}

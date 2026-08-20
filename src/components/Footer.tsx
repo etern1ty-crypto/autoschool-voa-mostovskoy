@@ -43,10 +43,9 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2 text-xs">
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «В» (Легковые авто) — 70 000 ₽</a></li>
               <li><a href="#pricing" className="hover:text-national-red transition">Категория «А» (Мотоциклы) — 25 000 ₽</a></li>
-              <li><a href="#pricing" className="hover:text-national-red transition">Категория «С» (Грузовые ГАЗ) — 75 000 ₽</a></li>
+              <li><a href="#pricing" className="hover:text-national-red transition">Категория «С» (Грузовые авто) — 75 000 ₽</a></li>
               <li><a href="#pricing" className="hover:text-national-red transition">Переподготовка с «В» на «С» — 49 000 ₽</a></li>
               <li><a href="#pricing" className="hover:text-national-red transition">Переподготовка с «С» на «В» — 38 000 ₽</a></li>
-              <li><a href="#pricing" className="hover:text-national-red transition">Переподготовка с «С» на «D» — 45 000 ₽</a></li>
             </ul>
           </div>
 
@@ -57,7 +56,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={onNavigateRosobrnadzor}
-                  className="text-left text-national-red hover:underline font-bold cursor-pointer"
+                  className="text-left text-white hover:underline font-bold cursor-pointer"
                 >
                   Сведения об образовательной организации
                 </button>
@@ -89,9 +88,6 @@ export const Footer: React.FC<FooterProps> = ({
               <a href={`tel:${SCHOOL_INFO.phoneClean}`} className="text-white font-bold hover:text-national-red">
                 {SCHOOL_INFO.phone}
               </a>
-            </div>
-            <div className="text-xs text-slate-400">
-              Стационарный: {SCHOOL_INFO.phoneLandline}
             </div>
             <div className="pt-2">
               <button

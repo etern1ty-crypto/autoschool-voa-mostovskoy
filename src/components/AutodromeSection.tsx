@@ -48,7 +48,7 @@ export const AutodromeSection: React.FC<AutodromeSectionProps> = ({ onOpenBookin
             <div className="tech-line" />
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Практические занятия проходят на собственной закрытой асфальтированной учебной площадке ВОА по адресу: <strong className="text-white">{SCHOOL_INFO.autodromeAddress}</strong>. Разметка упражнений, освещение, эстакада и учебные дорожные знаки для отработки всех элементов квалификационного экзамена.
+              Практические занятия проходят на собственной закрытой асфальтированной учебной площадке ВОА по адресу: <strong className="text-white">{SCHOOL_INFO.autodromeAddress}</strong>. Разметка упражнений, эстакада и учебные дорожные знаки для отработки всех элементов квалификационного экзамена.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">

@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onNavigateRosobrnadzor}
               className="text-xs text-slate-400 hover:text-national-red transition underline decoration-dotted font-medium hidden sm:inline cursor-pointer"
             >
-              Сведения об организации
+              Сведения об образовательной организации
             </button>
 
             {/* Кнопка для слабовидящих */}
@@ -59,14 +59,14 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between relative">
         {/* Left Links */}
-        <div className="hidden lg:flex items-center gap-7 text-xs uppercase tracking-wider font-bold text-slate-300 flex-1 justify-end pr-10">
-          <a href="#fleet" className="nav-glow transition-colors py-2">Автопарк</a>
-          <a href="#pricing" className="nav-glow transition-colors py-2">Программы и цены</a>
-          <a href="#autodrome" className="nav-glow transition-colors py-2">Учебная площадка</a>
+        <div className="hidden lg:flex items-center gap-6 xl:gap-7 text-xs uppercase tracking-wider font-bold text-slate-300 flex-1 justify-end pr-8 xl:pr-10">
+          <a href="#fleet" className="nav-glow transition-colors py-2 whitespace-nowrap">Автопарк</a>
+          <a href="#pricing" className="nav-glow transition-colors py-2 whitespace-nowrap">Программы и цены</a>
+          <a href="#autodrome" className="nav-glow transition-colors py-2 whitespace-nowrap">Учебная площадка</a>
         </div>
 
         {/* Center Brand with Official VOA Logo */}
-        <a href="#hero" className="flex items-center gap-2.5 sm:gap-3 group relative z-10">
+        <a href="#hero" className="flex items-center gap-2.5 sm:gap-3 group relative z-10 shrink-0">
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#12161F] border-2 border-national-red shadow-[0_0_18px_rgba(227,30,36,0.45)] flex items-center justify-center p-0.5 group-hover:scale-105 transition-transform overflow-hidden shrink-0">
             <img
               src="/images/voa-logo.webp"
@@ -75,34 +75,40 @@ export const Header: React.FC<HeaderProps> = ({
             />
           </div>
           <div className="text-left">
-            <div className="font-extrabold text-sm sm:text-base tracking-wider text-white flex items-center gap-1 uppercase">
+            <div className="font-extrabold text-sm sm:text-base tracking-wider text-white flex items-center gap-1 uppercase whitespace-nowrap">
               АВТОШКОЛА <span className="text-national-red">ВОА</span>
             </div>
-            <div className="text-xs uppercase tracking-widest text-slate-400 font-semibold">
+            <div className="text-xs uppercase tracking-widest text-slate-400 font-semibold whitespace-nowrap">
               Мостовское отделение
             </div>
           </div>
         </a>
 
         {/* Right Links & Action */}
-        <div className="hidden lg:flex items-center gap-6 text-xs uppercase tracking-wider font-bold text-slate-300 flex-1 justify-start pl-10">
-          <a href="#classroom" className="nav-glow transition-colors py-2">Классы</a>
-          <a href="#admission" className="nav-glow transition-colors py-2">Поступление</a>
-          <a href="#contacts" className="nav-glow transition-colors py-2">Контакты</a>
+        <div className="hidden lg:flex items-center gap-5 xl:gap-6 text-xs uppercase tracking-wider font-bold text-slate-300 flex-1 justify-start pl-8 xl:pl-10">
+          <a href="#classroom" className="nav-glow transition-colors py-2 whitespace-nowrap">Классы</a>
+          <a href="#admission" className="nav-glow transition-colors py-2 whitespace-nowrap">Поступление</a>
+          <a href="#contacts" className="nav-glow transition-colors py-2 whitespace-nowrap">Контакты</a>
+          <button
+            onClick={onNavigateRosobrnadzor}
+            className="nav-glow transition-colors py-2 whitespace-nowrap text-slate-400 hover:text-white uppercase font-bold cursor-pointer"
+          >
+            Сведения об ОО
+          </button>
 
           {/* Телефон слева от кнопки "Записаться" */}
-          <div className="flex items-center gap-4 ml-auto">
+          <div className="flex items-center gap-3 xl:gap-4 ml-auto shrink-0 whitespace-nowrap">
             <a
               href={`tel:${SCHOOL_INFO.phoneClean}`}
-              className="flex items-center gap-1.5 text-white hover:text-national-red transition font-extrabold tracking-normal py-2"
+              className="flex items-center gap-1.5 text-white hover:text-national-red transition font-extrabold tracking-normal py-2 whitespace-nowrap"
             >
-              <Phone className="w-4 h-4 text-national-red keep-icon" />
-              <span className="text-xs">{SCHOOL_INFO.phone}</span>
+              <Phone className="w-4 h-4 text-national-red keep-icon shrink-0" />
+              <span className="text-xs whitespace-nowrap">{SCHOOL_INFO.phone}</span>
             </a>
 
             <button
               onClick={onOpenBooking}
-              className="min-h-[44px] bg-national-red text-white px-5 py-2.5 rounded-sm font-extrabold uppercase tracking-wider text-xs hover:bg-red-700 transition-all hover:shadow-[0_0_20px_rgba(227,30,36,0.5)] transform hover:-translate-y-0.5 duration-200 flex items-center justify-center cursor-pointer"
+              className="min-h-[44px] bg-national-red text-white px-4 xl:px-5 py-2.5 rounded-sm font-extrabold uppercase tracking-wider text-xs hover:bg-red-700 transition-all hover:shadow-[0_0_20px_rgba(227,30,36,0.5)] transform hover:-translate-y-0.5 duration-200 flex items-center justify-center cursor-pointer whitespace-nowrap shrink-0"
             >
               Связаться
             </button>

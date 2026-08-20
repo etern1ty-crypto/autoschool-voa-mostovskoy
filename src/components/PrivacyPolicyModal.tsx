@@ -98,7 +98,7 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
               <div><strong>Оператор:</strong> {SCHOOL_INFO.fullName}</div>
               <div><strong>Юридический адрес:</strong> {SCHOOL_INFO.legalAddress}</div>
               <div><strong>Учебная часть:</strong> {SCHOOL_INFO.primaryAddress}</div>
-              <div><strong>Телефон:</strong> {SCHOOL_INFO.phone} / {SCHOOL_INFO.phoneLandline}</div>
+              <div><strong>Телефон:</strong> {SCHOOL_INFO.phone}</div>
               <div><strong>Email:</strong> {SCHOOL_INFO.email}</div>
             </div>
           </div>

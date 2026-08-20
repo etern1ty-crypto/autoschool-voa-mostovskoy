@@ -70,7 +70,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           <div className="tech-line" />
 
           <p className="text-xs text-slate-300 leading-relaxed">
-            Для записи в учебную группу и заключения договора свяжитесь с учебной частью по телефону или посетите офис автошколы:
+            Для записи в учебную группу и заключения договора свяжитесь с учебной частью по телефону или посетите учебный класс автошколы:
           </p>
 
           <div className="space-y-2.5 text-xs text-slate-300">
@@ -81,7 +81,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <a href={`tel:${SCHOOL_INFO.phoneClean}`} className="text-white font-bold text-base hover:text-national-red transition">
                   {SCHOOL_INFO.phone}
                 </a>
-                <div className="text-slate-400 text-xs mt-0.5">Стационарный: {SCHOOL_INFO.phoneLandline}</div>
               </div>
             </div>
 
@@ -118,7 +117,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               className="flex-1 min-h-[44px] rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg shadow-national-red/30"
             >
               <Phone className="w-4 h-4" />
-              <span>Позвонить прямо сейчас</span>
+              <span>Позвонить</span>
             </a>
 
             <button

@@ -16,8 +16,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const slides = [
     {
       image: '/images/slider/autodrome.jpg',
-      title: 'Собственный закрытый автодром',
-      badge: 'Учебная площадка по стандартам ГИБДД',
+      title: 'Собственная закрытая учебная площадка',
+      badge: 'Закрытая учебная площадка ВОА',
     },
     {
       image: '/images/classroom/classroom-overview.jpg',
@@ -66,7 +66,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* State Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-surface-card/90 border border-white/10 text-xs font-bold uppercase tracking-wider mb-5 text-slate-300 shadow-lg backdrop-blur-md">
           <ShieldCheck className="w-4 h-4 text-national-red shrink-0" />
-          <span>Мостовское отделение ВОА • С 1973 года</span>
+          <span>Мостовское районное отделение ВОА</span>
         </div>
 
         {/* Main Headline */}
@@ -76,7 +76,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Subtitle */}
         <p className="text-sm sm:text-lg text-slate-300 max-w-2xl mb-8 leading-relaxed drop-shadow">
-          Подготовка водителей категорий <strong className="text-white">«А», «В», «С»</strong> и профессиональная переподготовка. Собственный закрытый автодром, современный учебный автопарк и опытные преподаватели.
+          Подготовка водителей категорий <strong className="text-white">«А», «В», «С»</strong> и профессиональная переподготовка. Собственная закрытая учебная площадка, оборудованный учебный автопарк и опытные преподаватели.
         </p>
 
         {/* Actions */}
@@ -85,7 +85,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             onClick={onOpenBooking}
             className="w-full sm:w-auto flex-1 min-h-[44px] px-8 py-4 rounded-sm bg-national-red hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 shadow-xl shadow-national-red/30 cursor-pointer"
           >
-            <span>Записаться на обучение</span>
+            <span>Связаться с учебной частью</span>
             <ArrowRight className="w-4 h-4" />
           </button>
 
@@ -94,7 +94,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             className="w-full sm:w-auto flex-1 min-h-[44px] px-6 py-4 rounded-sm bg-surface-card/90 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 border border-white/10 backdrop-blur-md flex items-center justify-center gap-2 cursor-pointer"
           >
             <ShieldCheck className="w-4 h-4 text-national-red" />
-            <span>Сведения об автошколе</span>
+            <span>Сведения об организации</span>
           </button>
         </div>
 
@@ -105,7 +105,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <Award className="w-4 h-4 text-national-red" />
               <span>Лицензия</span>
             </div>
-            <p className="text-xs text-slate-400">Бессрочная лицензия МОН КК</p>
+            <p className="text-xs text-slate-400">Действующая лицензия МОН КК</p>
           </div>
 
           <div className="dashboard-card p-3.5 sm:p-4 rounded-xl border-white/10 backdrop-blur-md">
@@ -129,7 +129,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <ShieldCheck className="w-4 h-4 text-national-red" />
               <span>Экзамен</span>
             </div>
-            <p className="text-xs text-slate-400">Сопровождение в ГИБДД</p>
+            <p className="text-xs text-slate-400">Организованная сдача в ГИБДД</p>
           </div>
         </div>
       </div>

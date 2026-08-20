@@ -37,7 +37,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
                 <div className="space-y-1 text-xs">
                   <div className="text-slate-400 font-bold uppercase tracking-wider">Адреса организации:</div>
                   <div className="text-white font-medium">
-                    Учебные классы (теория): <strong className="text-white">{SCHOOL_INFO.primaryAddress}</strong>
+                    Учебные кабинеты (теория): <strong className="text-white">{SCHOOL_INFO.primaryAddress}</strong>
                   </div>
                   <div className="text-slate-300">
                     Учебная площадка (практика): <strong className="text-white">{SCHOOL_INFO.autodromeAddress}</strong>
@@ -66,14 +66,13 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="text-xs">
-                  <div className="text-slate-400 font-bold uppercase tracking-wider">Телефоны учебной части:</div>
+                  <div className="text-slate-400 font-bold uppercase tracking-wider">Телефон учебной части:</div>
                   <a
                     href={`tel:${SCHOOL_INFO.phoneClean}`}
                     className="font-extrabold text-white text-lg sm:text-xl hover:text-national-red transition-colors block mt-0.5"
                   >
                     {SCHOOL_INFO.phone}
                   </a>
-                  <div className="text-slate-300 text-xs mt-0.5">Стационарный: {SCHOOL_INFO.phoneLandline}</div>
                 </div>
               </div>
             </div>
@@ -93,7 +92,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
                 className="w-full min-h-[44px] py-3.5 rounded-sm bg-surface-card border border-white/10 text-slate-300 hover:text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
               >
                 <Mail className="w-4 h-4 text-national-red" />
-                <span>Написать на email: {SCHOOL_INFO.email}</span>
+                <span>Написать: {SCHOOL_INFO.email}</span>
               </a>
 
               <button
@@ -113,7 +112,7 @@ export const ContactsSection: React.FC<ContactsSectionProps> = ({ onOpenBooking 
                 src="https://yandex.ru/map-widget/v1/?um=constructor%3A030fb4e1f6367cc6c8f079911f84e66b16063b2a8a7e96c29e531d02781c388c&amp;source=constructor"
                 width="100%"
                 height="100%"
-                title="Карта расположения автошколы ВОА Мостовской"
+                title="Карта расположения автошколы ВОА Мостовской (ул. Красная 88 и ул. Кооперативная 28)"
                 className="w-full flex-1 rounded-xl border-0 min-h-[360px] lg:h-full"
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin allow-popups"
